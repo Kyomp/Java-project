@@ -41,4 +41,7 @@ public class Room {
 		guest.checkOut();
 		this.guest = null;
 	}
+	public void chargeGuest() {
+		guest.charge(costPerNight);
+	}
 }
