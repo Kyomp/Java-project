@@ -44,7 +44,6 @@ public class Menu {
 	}
 	private void loadStaffList() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	private void loadGuests() {
