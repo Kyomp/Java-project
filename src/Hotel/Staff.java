@@ -29,7 +29,7 @@ public class Staff {
 		this.work_room = room;
 	}
 	
-	public void deassignRoom() {
+	public void unassignRoom() {
 		this.work_room = null;
 	}
 }
