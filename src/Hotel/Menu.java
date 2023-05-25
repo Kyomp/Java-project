@@ -3,7 +3,14 @@ package Hotel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Menu {
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+public class Menu extends Application{
 	private ArrayList<Room> hotelRooms;
 	private ArrayList<Person> Guests;
 	private ArrayList<Staff> staffList;
@@ -20,7 +27,18 @@ public class Menu {
 		Fridge.addAllValidItems(validItems);
 		// TODO Auto-generated constructor stub
 	}
-
+	@Override
+	public void start(Stage primaryStage) throws Exception{
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/menu.fxml"));
+			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	private void addRooms() {
 		
 	}
@@ -60,6 +78,7 @@ public class Menu {
 	}
 	public static void main(String[] args) {
 		Menu menu = new Menu();
+		launch(args);
 		menu.saveInfo();
 	}
 }
