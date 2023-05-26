@@ -1,10 +1,13 @@
 package Hotel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -15,6 +18,9 @@ public class Menu extends Application{
 	private ArrayList<Person> Guests;
 	private ArrayList<Staff> staffList;
 	private HashMap<String, Integer> validItems;
+	private Parent root;
+	private Scene scene;
+	private Stage stage;
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
@@ -30,29 +36,71 @@ public class Menu extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/menu.fxml"));
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
+			scene = new Scene(root);
+			stage = primaryStage;
+			stage.setScene(scene);
+			stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	private void addRooms() {
+	public void guestMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("GuestMenu.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void staffMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("staffMenu.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void managementMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("ManagementMenu.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void addRoomMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("addRoom.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void addGuestMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("addGuest.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void addStaffMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("addStaff.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	private void addRoom() {
 		
 	}
-	private void removeRooms() {
+	private void removeRoom() {
 		
 	}
-	private void addGuest() {
+	private void addGuest(){
 		
 	}
 	private void removeGuest() {
 		
 	}
-	private void addStaff() {
-		
+	private void addStaff(){
+
 	}
 	private void removeStaff() {
 		
