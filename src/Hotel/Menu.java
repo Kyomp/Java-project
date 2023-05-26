@@ -6,11 +6,14 @@ import java.util.HashMap;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Menu extends Application{
@@ -21,6 +24,12 @@ public class Menu extends Application{
 	private Parent root;
 	private Scene scene;
 	private Stage stage;
+	@FXML
+	TextField Name;
+	@FXML
+	TextField Phone;
+	@FXML
+	Text PhoneError;
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
@@ -87,20 +96,26 @@ public class Menu extends Application{
 		stage.setScene(scene);
 		stage.show();
 	}
-	private void addRoom() {
+	public void addRoom() {
 		
 	}
 	private void removeRoom() {
 		
 	}
-	private void addGuest(){
-		
+	public void addGuest(ActionEvent e) throws IOException{
+		try {
+			Guests.add(new Person(Name.getText(),Phone.getText()));
+			guestMenu(e);
+		}catch(IllegalArgumentException IAE) {
+			PhoneError.setText(IAE.getMessage());
+			PhoneError.setOpacity(1);
+		}
 	}
 	private void removeGuest() {
 		
 	}
-	private void addStaff(){
-
+	public void addStaff(){
+		
 	}
 	private void removeStaff() {
 		
@@ -122,7 +137,11 @@ public class Menu extends Application{
 		
 	}
 	private void loadValidItems() {
-		
+		validItems.put("Coca Cola", 15000);
+		validItems.put("Water bottle", 10000);
+		validItems.put("Pepsi", 14500);
+		validItems.put("Heineken", 20000);
+		validItems.put("Bud Light", 17000);
 	}
 	public static void main(String[] args) {
 		Menu menu = new Menu();
