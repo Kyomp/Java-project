@@ -42,6 +42,9 @@ public class Room {
 		this.guest = null;
 	}
 	public void chargeGuest() {
-		guest.charge(costPerNight);
+		this.guest.charge(costPerNight);
+	}
+	public String getDetails() {
+		return this.roomNumber + " " + this.type + " " + this.costPerNight;
 	}
 }

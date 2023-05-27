@@ -1,8 +1,11 @@
 package Hotel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -12,14 +15,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Menu extends Application{
-	private ArrayList<Room> hotelRooms;
-	private ArrayList<Person> Guests;
-	private ArrayList<Staff> staffList;
+	private static ArrayList<Room> hotelRooms;
+	private static ArrayList<Person> Guests;
+	private static ArrayList<Staff> staffList;
 	private HashMap<String, Integer> validItems;
 	private Parent root;
 	private Scene scene;
@@ -125,16 +127,53 @@ public class Menu extends Application{
 	}
 	private void loadStaffList() {
 		// TODO Auto-generated method stub
+		try {
+			File guestFile = new File("StaffList.txt");
+			Scanner input = new Scanner(guestFile);
+			
+			while (input.hasNextLine()) {
+				String aString = input.nextLine();
+				String[] parts = aString.split(",");
+				Staff s1 = new Staff(parts[0], parts[1], parts[2]);
+				staffList.add(s1);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void loadGuests() {
 		// TODO Auto-generated method stub
-		
+		try {
+			File guestFile = new File("GuestList.txt");
+			Scanner input = new Scanner(guestFile);
+			
+			while (input.hasNextLine()) {
+				String aString = input.nextLine();
+				String[] parts = aString.split(",");
+				Person p1 = new Person(parts[0], parts[1]);
+				Guests.add(p1);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void loadhotelRooms() {
 		// TODO Auto-generated method stub
-		
+		try {
+			File guestFile = new File("RoomList.txt");
+			Scanner input = new Scanner(guestFile);
+			
+			while (input.hasNextLine()) {
+				String aString = input.nextLine();
+				String[] parts = aString.split(",");
+				Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
+				hotelRooms.add(r1);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	private void loadValidItems() {
 		validItems.put("Coca Cola", 15000);
@@ -147,5 +186,17 @@ public class Menu extends Application{
 		Menu menu = new Menu();
 		launch(args);
 		menu.saveInfo();
+		
+		for(Person Guest: Guests) {
+			System.out.println(Guest.getDetails());
+		}
+		
+		for(Room room: hotelRooms) {
+			System.out.println(room.getDetails());
+		}
+		
+		for(Staff staff: staffList) {
+			System.out.println(staff.getDetails());
+		}
 	}
 }

@@ -38,4 +38,8 @@ public class Person {
 		this.roomNumber = -1;
 	}
 	
+	public String getDetails() {
+		return (this.name + " " + this.phoneNumber);
+	}
+	
 }
