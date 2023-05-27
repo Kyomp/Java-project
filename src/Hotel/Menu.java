@@ -186,17 +186,16 @@ public class Menu extends Application{
 		Menu menu = new Menu();
 		launch(args);
 		menu.saveInfo();
-		
-		for(Person Guest: Guests) {
-			System.out.println(Guest.getDetails());
-		}
-		
-		for(Room room: hotelRooms) {
-			System.out.println(room.getDetails());
-		}
-		
-		for(Staff staff: staffList) {
-			System.out.println(staff.getDetails());
-		}
+//		for(Person Guest: Guests) {
+//			System.out.println(Guest.getDetails());
+//		}
+//		
+//		for(Room room: hotelRooms) {
+//			System.out.println(room.getDetails());
+//		}
+//		
+//		for(Staff staff: staffList) {
+//			System.out.println(staff.getDetails());
+//		}
 	}
 }
