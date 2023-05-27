@@ -183,6 +183,7 @@ public class Menu extends Application{
 		validItems.put("Bud Light", 17000);
 	}
 	public static void main(String[] args) {
+		//kliatan ngak nat?
 		Menu menu = new Menu();
 		launch(args);
 		menu.saveInfo();
