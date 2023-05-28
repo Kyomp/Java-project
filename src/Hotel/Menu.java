@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -35,14 +36,19 @@ public class Menu extends Application implements Initializable{
 	private Parent root;
 	private Scene scene;
 	private Stage stage;
+	private int test = 0;
 	@FXML
 	TextField Name;
 	@FXML
 	TextField Phone;
 	@FXML
+	TextField id2;
+	@FXML
 	Text PhoneError;
 	@FXML
 	FlowPane List;
+	@FXML
+	ChoiceBox<Character> id1;
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
@@ -57,6 +63,7 @@ public class Menu extends Application implements Initializable{
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
+		System.out.println(test);
 		if(arg0.equals(getClass().getResource("GuestMenu.fxml"))) {
 			for(Person G: Guests) {
 				VBox guestInfo = new VBox();
@@ -96,6 +103,10 @@ public class Menu extends Application implements Initializable{
 				List.getChildren().add(roomInfo);
 			}
 			return;
+		}
+		if(arg0.equals(getClass().getResource("addStaff.fxml"))) {
+			Character[] id = {'M','F'};
+			id1.getItems().addAll(id);
 		}
 	}
 	@Override

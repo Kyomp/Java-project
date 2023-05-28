@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,6 +33,9 @@
                   <Text fx:id="PhoneError" fill="RED" layoutX="30.0" layoutY="208.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                   <TextField layoutX="30.0" layoutY="84.0" prefHeight="25.0" prefWidth="293.0" />
                   <TextField layoutX="30.0" layoutY="170.0" prefHeight="25.0" prefWidth="293.0" />
+                  <ChoiceBox fx:id="id1" layoutX="30.0" layoutY="250.0" prefHeight="25.0" prefWidth="45.0" />
+                  <Spinner fx:id="id2" layoutX="86.0" layoutY="250.0" />
+                  <Text layoutX="30.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff ID:" />
                </children></AnchorPane>
         </items>
       </SplitPane>
