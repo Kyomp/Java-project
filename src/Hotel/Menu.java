@@ -3,25 +3,31 @@ package Hotel;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Menu extends Application{
-	private static ArrayList<Room> hotelRooms;
-	private static ArrayList<Person> Guests;
-	private static ArrayList<Staff> staffList;
+public class Menu extends Application implements Initializable{
+	private ArrayList<Room> hotelRooms;
+	private ArrayList<Person> Guests;
+	private ArrayList<Staff> staffList;
 	private HashMap<String, Integer> validItems;
 	private Parent root;
 	private Scene scene;
@@ -32,6 +38,8 @@ public class Menu extends Application{
 	TextField Phone;
 	@FXML
 	Text PhoneError;
+	@FXML
+	FlowPane List;
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
@@ -43,6 +51,44 @@ public class Menu extends Application{
 		loadValidItems();
 		Fridge.addAllValidItems(validItems);
 		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1){
+		if(arg0.equals(getClass().getResource("GuestMenu.fxml"))) {
+			for(Person G: Guests) {
+				VBox guestInfo = new VBox();
+				guestInfo.getChildren().add(new Text(G.getName()));
+				guestInfo.getChildren().add(new Text(G.getPhone()));
+				guestInfo.getChildren().add(new Text(Integer.toString(G.getRoomNumber())));
+				guestInfo.setAlignment(Pos.TOP_CENTER);
+				List.getChildren().add(guestInfo);
+			}
+			return;
+		}
+		if(arg0.equals(getClass().getResource("StaffMenu.fxml"))) {
+			for(Staff S: staffList) {
+				VBox staffInfo = new VBox();
+				staffInfo.getChildren().add(new Text(S.getName()));
+				staffInfo.getChildren().add(new Text(S.getPhone()));
+				staffInfo.getChildren().add(new Text(S.getStaffID()));
+				staffInfo.setAlignment(Pos.TOP_CENTER);
+				List.getChildren().add(staffInfo);
+			}
+			return;
+		}
+		if(arg0.equals(getClass().getResource("ManagementMenu.fxml"))) {
+			for(Room R: hotelRooms) {
+				VBox roomInfo = new VBox();
+				roomInfo.getChildren().add(new Text(Integer.toString(R.getRoomNumber())));
+				roomInfo.getChildren().add(new Text(R.getType()));
+				roomInfo.getChildren().add(new Text(Integer.toString(R.getCostPerNight())));
+				roomInfo.getChildren().add(new Text(R.getAvailability()?"Available":"Occupied"));
+				
+				roomInfo.setAlignment(Pos.TOP_CENTER);
+				List.getChildren().add(roomInfo);
+			}
+			return;
+		}
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception{
@@ -64,7 +110,7 @@ public class Menu extends Application{
 		stage.show();
 	}
 	public void staffMenu(ActionEvent e) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("staffMenu.fxml"));
+		root = FXMLLoader.load(getClass().getResource("StaffMenu.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -183,7 +229,6 @@ public class Menu extends Application{
 		validItems.put("Bud Light", 17000);
 	}
 	public static void main(String[] args) {
-		//kliatan ngak nat?
 		Menu menu = new Menu();
 		launch(args);
 		menu.saveInfo();

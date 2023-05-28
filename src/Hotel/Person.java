@@ -30,7 +30,7 @@ public class Person {
 	public int getRoomNumber() {
 		return roomNumber;
 	}
-
+	
 	public void checkIn(int roomNumber) {
 		this.roomNumber = roomNumber;
 	}
@@ -42,4 +42,10 @@ public class Person {
 		return (this.name + " " + this.phoneNumber);
 	}
 	
+	public String getName() {
+		return name;
+	}
+	public String getPhone() {
+		return phoneNumber;
+	}
 }

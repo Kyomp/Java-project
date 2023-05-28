@@ -51,4 +51,13 @@ public class Staff {
 	public String getDetails() {
 		return this.staffID + " " + this.staffName + " " + this.phoneNumber;
 	}
+	public String getStaffID() {
+		return staffID;
+	}
+	public String getName() {
+		return staffName;
+	}
+	public String getPhone() {
+		return phoneNumber;
+	}
 }

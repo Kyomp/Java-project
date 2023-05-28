@@ -47,4 +47,19 @@ public class Room {
 	public String getDetails() {
 		return this.roomNumber + " " + this.type + " " + this.costPerNight;
 	}
+	public String getType() {
+		return type;
+	}
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+	public Person getGuest() {
+		return guest;
+	}
+	public boolean getAvailability() {
+		return availability;
+	}
+	public int getCostPerNight() {
+		return costPerNight;
+	}
 }
