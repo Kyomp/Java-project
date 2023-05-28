@@ -22,11 +22,11 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="310.0">
                <children>
-                  <ScrollPane layoutX="14.0" layoutY="54.0" prefHeight="362.0" prefWidth="333.0">
+                  <ScrollPane layoutX="8.0" layoutY="50.0" prefHeight="359.0" prefWidth="343.0">
                      <content>
-                        <FlowPane fx:id="List" hgap="20.0" maxHeight="1.7976931348623157E308" prefHeight="362.0" prefWidth="333.0" vgap="30.0">
+                        <FlowPane fx:id="List" hgap="10.0" maxHeight="1.7976931348623157E308" prefHeight="359.0" prefWidth="328.0" vgap="15.0">
                            <padding>
-                              <Insets bottom="30.0" left="20.0" />
+                              <Insets bottom="15.0" left="10.0" top="15.0"/>
                            </padding></FlowPane>
                      </content>
                   </ScrollPane>
@@ -35,7 +35,7 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <Button layoutX="161.0" layoutY="425.0" mnemonicParsing="false" onAction="#addGuestMenu" text="Add" />
+                  <Button layoutX="160.0" layoutY="423.0" mnemonicParsing="false" onAction="#addGuestMenu" text="Add" />
                </children></AnchorPane>
         </items>
       </SplitPane>

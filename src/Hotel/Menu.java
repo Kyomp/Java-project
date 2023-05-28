@@ -19,6 +19,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -59,8 +62,10 @@ public class Menu extends Application implements Initializable{
 				VBox guestInfo = new VBox();
 				guestInfo.getChildren().add(new Text(G.getName()));
 				guestInfo.getChildren().add(new Text(G.getPhone()));
-				guestInfo.getChildren().add(new Text(Integer.toString(G.getRoomNumber())));
+				guestInfo.getChildren().add(new Text(G.getRoomNumber()!=-1?Integer.toString(G.getRoomNumber()):"None"));
 				guestInfo.setAlignment(Pos.TOP_CENTER);
+				guestInfo.setPrefWidth(80);
+				guestInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
 				List.getChildren().add(guestInfo);
 			}
 			return;
@@ -72,6 +77,8 @@ public class Menu extends Application implements Initializable{
 				staffInfo.getChildren().add(new Text(S.getPhone()));
 				staffInfo.getChildren().add(new Text(S.getStaffID()));
 				staffInfo.setAlignment(Pos.TOP_CENTER);
+				staffInfo.setPrefWidth(80);
+				staffInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
 				List.getChildren().add(staffInfo);
 			}
 			return;
@@ -83,8 +90,9 @@ public class Menu extends Application implements Initializable{
 				roomInfo.getChildren().add(new Text(R.getType()));
 				roomInfo.getChildren().add(new Text(Integer.toString(R.getCostPerNight())));
 				roomInfo.getChildren().add(new Text(R.getAvailability()?"Available":"Occupied"));
-				
+				roomInfo.setPrefWidth(95);
 				roomInfo.setAlignment(Pos.TOP_CENTER);
+				roomInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
 				List.getChildren().add(roomInfo);
 			}
 			return;
