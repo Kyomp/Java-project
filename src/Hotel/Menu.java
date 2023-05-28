@@ -161,7 +161,14 @@ public class Menu extends Application implements Initializable{
 	public void addGuest(ActionEvent e) throws IOException{
 		try {
 			Guests.add(new Person(Name.getText(),Phone.getText()));
+			for(Person Guest: Guests) {
+				System.out.println(Guest.getDetails());
+			}
+			System.out.println("----------------------------------");
 			guestMenu(e);
+			for(Person Guest: Guests) {
+				System.out.println(Guest.getDetails());
+			}
 		}catch(IllegalArgumentException IAE) {
 			PhoneError.setText(IAE.getMessage());
 			PhoneError.setOpacity(1);
@@ -240,16 +247,5 @@ public class Menu extends Application implements Initializable{
 		Menu menu = new Menu();
 		launch(args);
 		menu.saveInfo();
-//		for(Person Guest: Guests) {
-//			System.out.println(Guest.getDetails());
-//		}
-//		
-//		for(Room room: hotelRooms) {
-//			System.out.println(room.getDetails());
-//		}
-//		
-//		for(Staff staff: staffList) {
-//			System.out.println(staff.getDetails());
-//		}
 	}
 }
