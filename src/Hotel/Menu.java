@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -54,7 +55,8 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	Spinner<Integer> ID_num;
 	@FXML
-	ChoiceBox<String> ID_gender;
+	ChoiceBox<Character> ID_gender;
+	SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 999);
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
@@ -145,6 +147,13 @@ public class Menu extends Application implements Initializable{
 			}
 			return;
 		}
+		if(arg0.equals(getClass().getResource("addStaff.fxml"))) {
+			Character[] gender = {'F','M'};
+			ID_gender.getItems().addAll(gender);
+			valueFactory.setValue(1);
+			ID_num.setValueFactory(valueFactory);
+			
+		}
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception{
@@ -224,7 +233,7 @@ public class Menu extends Application implements Initializable{
 	private void removeGuest() {
 		
 	}
-	public void addStaff(){
+	public void addStaff(ActionEvent e) throws IOException{
 		
 	}
 	private void removeStaff() {
