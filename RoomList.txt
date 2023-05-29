@@ -58,3 +58,7 @@
 318,Deluxe,1400000
 319,Executive,2000000
 320,Executive,2000000
+321,Standard,800000
+322,Standard,800000
+323,Standard,800000
+412,Executive,50000000
