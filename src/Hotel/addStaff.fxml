@@ -29,13 +29,14 @@
                   </Text>
                   <Button layoutX="160.0" layoutY="427.0" mnemonicParsing="false" text="Add" />
                   <Text layoutX="30.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
-                  <Text layoutX="30.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" />
+                  <Text layoutX="30.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number:" />
                   <Text fx:id="PhoneError" fill="RED" layoutX="30.0" layoutY="208.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                   <TextField layoutX="30.0" layoutY="84.0" prefHeight="25.0" prefWidth="293.0" />
-                  <TextField layoutX="30.0" layoutY="170.0" prefHeight="25.0" prefWidth="293.0" />
-                  <ChoiceBox fx:id="id1" layoutX="30.0" layoutY="250.0" prefHeight="25.0" prefWidth="45.0" />
-                  <Spinner fx:id="id2" layoutX="86.0" layoutY="250.0" />
-                  <Text layoutX="30.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff ID:" />
+                  <TextField layoutX="30.0" layoutY="152.0" prefHeight="25.0" prefWidth="293.0" />
+                  <ChoiceBox fx:id="ID_gender" layoutX="30.0" layoutY="212.0" prefHeight="26.0" prefWidth="50.0" />
+                  <Spinner fx:id="ID_num" layoutX="90.0" layoutY="213.0" />
+                  <Text layoutX="30.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff ID:" />
+                  <Text fx:id="ID_error" fill="RED" layoutX="30.0" layoutY="252.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                </children></AnchorPane>
         </items>
       </SplitPane>
