@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -39,6 +41,7 @@ public class Menu extends Application implements Initializable{
 	private ArrayList<Person> Guests;
 	private ArrayList<Staff> staffList;
 	private HashMap<String, Integer> validItems;
+	public static Set<String> ID_List;
 	private Parent root;
 	private Scene scene;
 	private Stage stage;
@@ -62,6 +65,7 @@ public class Menu extends Application implements Initializable{
 		Guests = new ArrayList<Person>();
 		staffList = new ArrayList<Staff>();
 		validItems = new HashMap<String,Integer>();
+		ID_List = new HashSet<String>();
 		Fridge.addAllValidItems(validItems);
 		// TODO Auto-generated constructor stub
 	}
@@ -234,7 +238,39 @@ public class Menu extends Application implements Initializable{
 		
 	}
 	public void addStaff(ActionEvent e) throws IOException{
-		
+		try {
+			loadStaffList();
+			PhoneError.setOpacity(0);
+			ID_error.setOpacity(0);
+			String numStringer;
+			System.out.println(ID_num.getValue());
+			if(ID_num.getValue() < 10) {
+				numStringer = "00" + ID_num.getValue().toString();
+			} else if (ID_num.getValue() < 100) {
+				numStringer = "0" + ID_num.getValue().toString();
+			} else{
+				numStringer = ID_num.getValue().toString();
+			}
+			numStringer = ID_gender.getValue().toString() + numStringer;
+			if(ID_List.contains(numStringer)) {
+				throw new IllegalArgumentException("The ID already exists");
+			}
+			staffList.add(new Staff(numStringer, Name.getText(),Phone.getText()));
+//			System.out.println("addGuest is run");
+//			for(Person G: Guests) {
+//				System.out.println(G.getDetails());
+//			}
+			staffMenu(e);
+		}catch(IllegalArgumentException IAE) {
+			if(IAE.getMessage().contains("phone")) {
+				PhoneError.setText(IAE.getMessage());
+				PhoneError.setOpacity(1);
+			}
+			else {
+				ID_error.setText(IAE.getMessage());
+				ID_error.setOpacity(1);
+			}
+		}
 	}
 	private void removeStaff() {
 		
@@ -291,6 +327,7 @@ public class Menu extends Application implements Initializable{
 				String[] parts = aString.split(",");
 				Staff s1 = new Staff(parts[0], parts[1], parts[2]);
 				staffList.add(s1);
+				ID_List.add(parts[0]);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
