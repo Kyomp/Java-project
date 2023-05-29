@@ -260,6 +260,7 @@ public class Menu extends Application implements Initializable{
 //			for(Person G: Guests) {
 //				System.out.println(G.getDetails());
 //			}
+			saveStaff();
 			staffMenu(e);
 		}catch(IllegalArgumentException IAE) {
 			if(IAE.getMessage().contains("phone")) {
