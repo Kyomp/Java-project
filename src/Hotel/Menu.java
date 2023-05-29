@@ -1,7 +1,10 @@
 package Hotel;
 
+import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -11,6 +14,7 @@ import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,6 +23,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -36,35 +41,36 @@ public class Menu extends Application implements Initializable{
 	private Parent root;
 	private Scene scene;
 	private Stage stage;
-	private int test = 0;
 	@FXML
 	TextField Name;
 	@FXML
 	TextField Phone;
 	@FXML
-	TextField id2;
-	@FXML
 	Text PhoneError;
+	@FXML
+	Text ID_error;
 	@FXML
 	FlowPane List;
 	@FXML
-	ChoiceBox<Character> id1;
+	Spinner<Integer> ID_num;
+	@FXML
+	ChoiceBox<String> ID_gender;
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
 		staffList = new ArrayList<Staff>();
 		validItems = new HashMap<String,Integer>();
-		loadhotelRooms();
-		loadGuests();
-		loadStaffList();
-		loadValidItems();
 		Fridge.addAllValidItems(validItems);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
-		System.out.println(test);
+		System.out.println("Initialize is run");
+		for(Person G: Guests) {
+			System.out.println(G.getDetails());
+		}
 		if(arg0.equals(getClass().getResource("GuestMenu.fxml"))) {
+			loadGuests();
 			for(Person G: Guests) {
 				VBox guestInfo = new VBox();
 				guestInfo.getChildren().add(new Text(G.getName()));
@@ -73,11 +79,14 @@ public class Menu extends Application implements Initializable{
 				guestInfo.setAlignment(Pos.TOP_CENTER);
 				guestInfo.setPrefWidth(80);
 				guestInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
+
 				List.getChildren().add(guestInfo);
+				saveGuest();
 			}
 			return;
 		}
 		if(arg0.equals(getClass().getResource("StaffMenu.fxml"))) {
+			loadStaffList();
 			for(Staff S: staffList) {
 				VBox staffInfo = new VBox();
 				staffInfo.getChildren().add(new Text(S.getName()));
@@ -87,10 +96,12 @@ public class Menu extends Application implements Initializable{
 				staffInfo.setPrefWidth(80);
 				staffInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
 				List.getChildren().add(staffInfo);
+				saveStaff();
 			}
 			return;
 		}
 		if(arg0.equals(getClass().getResource("ManagementMenu.fxml"))) {
+			loadhotelRooms();
 			for(Room R: hotelRooms) {
 				VBox roomInfo = new VBox();
 				roomInfo.getChildren().add(new Text(Integer.toString(R.getRoomNumber())));
@@ -101,12 +112,9 @@ public class Menu extends Application implements Initializable{
 				roomInfo.setAlignment(Pos.TOP_CENTER);
 				roomInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
 				List.getChildren().add(roomInfo);
+				saveRoom();
 			}
 			return;
-		}
-		if(arg0.equals(getClass().getResource("addStaff.fxml"))) {
-			Character[] id = {'M','F'};
-			id1.getItems().addAll(id);
 		}
 	}
 	@Override
@@ -171,15 +179,14 @@ public class Menu extends Application implements Initializable{
 	}
 	public void addGuest(ActionEvent e) throws IOException{
 		try {
+			loadGuests();
 			Guests.add(new Person(Name.getText(),Phone.getText()));
-			for(Person Guest: Guests) {
-				System.out.println(Guest.getDetails());
+			System.out.println("addGuest is run");
+			for(Person G: Guests) {
+				System.out.println(G.getDetails());
 			}
-			System.out.println("----------------------------------");
+			saveGuest();
 			guestMenu(e);
-			for(Person Guest: Guests) {
-				System.out.println(Guest.getDetails());
-			}
 		}catch(IllegalArgumentException IAE) {
 			PhoneError.setText(IAE.getMessage());
 			PhoneError.setOpacity(1);
@@ -195,7 +202,45 @@ public class Menu extends Application implements Initializable{
 		
 	}
 	private void saveInfo() {
-		
+		saveGuest();
+		saveRoom();
+		saveStaff();
+	}
+	private void saveGuest() {
+		try {
+			FileWriter writer = new FileWriter("GuestList.txt", false);
+	        writer.write("");
+	        for (Person G : Guests) {
+	        	writer.write(G.getName() + "," + G.getPhone()+"\n");
+	        }
+	        writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void saveRoom() {
+		try {
+			FileWriter writer = new FileWriter("RoomList.txt", false);
+	        writer.write("");
+	        for (Room R : hotelRooms) {
+	        	writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight()+"\n");
+	        }
+	        writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void saveStaff() {
+		try {
+			FileWriter writer = new FileWriter("StaffList.txt", false);
+	        writer.write("");
+	        for (Staff S : staffList) {
+	        	writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone()+"\n");
+	        }
+	        writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	private void loadStaffList() {
 		// TODO Auto-generated method stub
@@ -257,6 +302,5 @@ public class Menu extends Application implements Initializable{
 	public static void main(String[] args) {
 		Menu menu = new Menu();
 		launch(args);
-		menu.saveInfo();
 	}
 }
