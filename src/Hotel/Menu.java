@@ -41,7 +41,8 @@ public class Menu extends Application implements Initializable{
 	private ArrayList<Person> Guests;
 	private ArrayList<Staff> staffList;
 	private HashMap<String, Integer> validItems;
-	public static Set<String> ID_List;
+	private Set<String> ID_List;
+	private Set<Integer> RoomNums;
 	private Parent root;
 	private Scene scene;
 	private Stage stage;
@@ -50,15 +51,25 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	TextField Phone;
 	@FXML
+	TextField roomNumber;
+	@FXML
+	TextField roomCost;
+	@FXML
 	Text PhoneError;
 	@FXML
 	Text ID_error;
+	@FXML
+	Text RoomError;
+	@FXML
+	Text PriceError;
 	@FXML
 	FlowPane List;
 	@FXML
 	Spinner<Integer> ID_num;
 	@FXML
 	ChoiceBox<Character> ID_gender;
+	@FXML
+	ChoiceBox<String> roomType;
 	SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 999);
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
@@ -66,6 +77,7 @@ public class Menu extends Application implements Initializable{
 		staffList = new ArrayList<Staff>();
 		validItems = new HashMap<String,Integer>();
 		ID_List = new HashSet<String>();
+		RoomNums = new HashSet<Integer>();
 		Fridge.addAllValidItems(validItems);
 		// TODO Auto-generated constructor stub
 	}
@@ -96,7 +108,7 @@ public class Menu extends Application implements Initializable{
 				    }
 				});
 				List.getChildren().add(guestInfo);
-				saveGuest();
+//				saveGuest();
 			}
 			return;
 		}
@@ -121,7 +133,7 @@ public class Menu extends Application implements Initializable{
 				    }
 				});
 				List.getChildren().add(staffInfo);
-				saveStaff();
+//				saveStaff();
 			}
 			return;
 		}
@@ -147,7 +159,7 @@ public class Menu extends Application implements Initializable{
 				    }
 				});
 				List.getChildren().add(roomInfo);
-				saveRoom();
+//				saveRoom();
 			}
 			return;
 		}
@@ -156,7 +168,12 @@ public class Menu extends Application implements Initializable{
 			ID_gender.getItems().addAll(gender);
 			valueFactory.setValue(1);
 			ID_num.setValueFactory(valueFactory);
-			
+			return;
+		}
+		if(arg0.equals(getClass().getResource("addRoom.fxml"))) {
+			String[] type = {"Standard", "Special Standard", "Deluxe", "Executive"};
+			roomType.getItems().addAll(type);
+			return;
 		}
 	}
 	@Override
@@ -213,8 +230,36 @@ public class Menu extends Application implements Initializable{
 		stage.setScene(scene);
 		stage.show();
 	}
-	public void addRoom() {
-		
+	public void addRoom(ActionEvent e) throws IOException {
+		try {
+			loadhotelRooms();
+			RoomError.setOpacity(0);
+			PriceError.setOpacity(0);
+			if(!roomNumber.getText().matches("[0-9]+")) {
+				throw new IllegalArgumentException("Room number can only contain numbers");
+			}
+			Integer num = Integer.parseInt(roomNumber.getText());
+			if(RoomNums.contains(num)) {
+				throw new IllegalArgumentException("Room number already exists");
+			}
+			if(!roomCost.getText().matches("[0-9]+")) {
+				throw new IllegalArgumentException("Room price can only contain numbers");
+			}
+			hotelRooms.add(new Room(num.intValue(), roomType.getValue(), Integer.parseInt(roomCost.getText())));
+			RoomNums.add(num);
+			saveRoom();
+			managementMenu(e);
+		}catch(IllegalArgumentException IAE) {
+			if(IAE.getMessage().contains("Room number")) {
+				RoomError.setText(IAE.getMessage());
+				RoomError.setOpacity(1);
+			}
+			else {
+				System.out.println("shitf");
+				PriceError.setText(IAE.getMessage());
+				PriceError.setOpacity(1);
+			}
+		}
 	}
 	private void removeRoom() {
 		
@@ -256,10 +301,6 @@ public class Menu extends Application implements Initializable{
 				throw new IllegalArgumentException("The ID already exists");
 			}
 			staffList.add(new Staff(numStringer, Name.getText(),Phone.getText()));
-//			System.out.println("addGuest is run");
-//			for(Person G: Guests) {
-//				System.out.println(G.getDetails());
-//			}
 			saveStaff();
 			staffMenu(e);
 		}catch(IllegalArgumentException IAE) {
@@ -363,6 +404,7 @@ public class Menu extends Application implements Initializable{
 				String[] parts = aString.split(",");
 				Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
 				hotelRooms.add(r1);
+				RoomNums.add(Integer.parseInt(parts[0]));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
