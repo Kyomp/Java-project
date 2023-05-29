@@ -1,7 +1,5 @@
 package Hotel;
 
-import java.awt.event.MouseEvent;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -25,6 +23,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -79,7 +79,16 @@ public class Menu extends Application implements Initializable{
 				guestInfo.setAlignment(Pos.TOP_CENTER);
 				guestInfo.setPrefWidth(80);
 				guestInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
-
+				guestInfo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				    @Override
+				    public void handle(MouseEvent mouseEvent) {
+				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+				            if(mouseEvent.getClickCount() == 2){
+				                System.out.println("Double clicked");
+				            }
+				        }
+				    }
+				});
 				List.getChildren().add(guestInfo);
 				saveGuest();
 			}
@@ -95,6 +104,16 @@ public class Menu extends Application implements Initializable{
 				staffInfo.setAlignment(Pos.TOP_CENTER);
 				staffInfo.setPrefWidth(80);
 				staffInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
+				staffInfo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				    @Override
+				    public void handle(MouseEvent mouseEvent) {
+				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+				            if(mouseEvent.getClickCount() == 2){
+				                System.out.println("Double clicked");
+				            }
+				        }
+				    }
+				});
 				List.getChildren().add(staffInfo);
 				saveStaff();
 			}
@@ -111,6 +130,16 @@ public class Menu extends Application implements Initializable{
 				roomInfo.setPrefWidth(95);
 				roomInfo.setAlignment(Pos.TOP_CENTER);
 				roomInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
+				roomInfo.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				    @Override
+				    public void handle(MouseEvent mouseEvent) {
+				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+				            if(mouseEvent.getClickCount() == 2){
+				                System.out.println("Double clicked");
+				            }
+				        }
+				    }
+				});
 				List.getChildren().add(roomInfo);
 				saveRoom();
 			}
