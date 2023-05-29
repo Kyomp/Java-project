@@ -7,17 +7,15 @@ public class Staff {
 	private final String staffID;
 	private final String staffName;
 	private final String phoneNumber;
-	private static Set<String> IDSet = new HashSet<String>();
+//	public static Set<String> ID_List = new HashSet<String>();
 	
 	public Staff(String staffID, String staffName, String phoneNumber) {
 		
 		if(!staffID.matches("(F|M).*[0-9]{3}$")) {
 			throw new IllegalArgumentException("The ID input has incorrect format");
-		}
-		else if(IDSet.contains(staffID)) {
-			throw new IllegalArgumentException("The ID already exists");
-		}
-		else {
+//		} else if(Staff.ID_List.contains(staffID)) {
+//			throw new IllegalArgumentException("The ID already exists");
+		}else {
 			this.staffID = staffID;
 		}
 		if(phoneNumber.matches("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")) {
@@ -27,6 +25,7 @@ public class Staff {
 			throw new IllegalArgumentException("The phone number is invalid");
 		}
 		this.staffName = staffName;
+//		Staff.ID_List.add(staffID);
 	}
 	public String getDetails() {
 		return this.staffID + " " + this.staffName + " " + this.phoneNumber;
