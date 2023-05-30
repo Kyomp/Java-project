@@ -21,7 +21,23 @@ public class Room {
 		guest = null;
 	}
 	
-	public Room(int roomNumber, List<String> fridgeContents,String type, int costPerNight) {
+	public Room(int roomNumber, String type, int costPerNight, Person g) {
+        clean_status = true;
+        this.roomNumber = roomNumber;
+        this.type = type;
+        this.fridge = new Fridge();
+        this.costPerNight = costPerNight;
+        if(g==null){
+                  this.guest = null;
+                  this.availability = true;
+                }
+                else{
+                  this.guest = g;
+                  this.availability = false;
+                }
+    }
+	
+	public Room(int roomNumber, List<String> fridgeContents, String type, int costPerNight) {
 		availability = true;
 		clean_status = true;
 		this.roomNumber = roomNumber;

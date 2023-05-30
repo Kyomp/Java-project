@@ -75,6 +75,8 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	Text PriceError;
 	@FXML
+	Text assignError;
+	@FXML
 	FlowPane List;
 	@FXML
 	Spinner<Integer> ID_num;
@@ -303,6 +305,13 @@ public class Menu extends Application implements Initializable{
 		stage.setScene(scene);
 		stage.show();
 	}
+	public void assignGuestRoomMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("AssignGuestRoom.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 	public void addRoom(ActionEvent e) throws IOException {
 		try {
 			loadhotelRooms();
@@ -334,9 +343,6 @@ public class Menu extends Application implements Initializable{
 			}
 		}
 	}
-	private void removeRoom() {
-		
-	}
 	public void addGuest(ActionEvent e) throws IOException{
 		try {
 			loadGuests();
@@ -363,6 +369,47 @@ public class Menu extends Application implements Initializable{
 		}
 		saveGuest();
 		guestMenu(e);
+	}
+	public void assignGuest(ActionEvent e) throws IOException{
+		try {
+			loadGuests();
+			loadhotelRooms();
+			assignError.setOpacity(0);
+			for(Room r : hotelRooms) {
+				if(r.getRoomNumber() == Integer.parseInt(RoomNumberDetail.getText())) {
+					if(r.getAvailability() == false) {
+						throw new IllegalArgumentException("This room is already assigned to another guest");
+					}
+				}
+			}
+			if(!RoomNums.contains(Integer.parseInt(RoomNumberDetail.getText()))) {
+				throw new IllegalArgumentException("This room does not exist");
+			}
+			Person G = loadGuestDetail();
+			for(Person Guest : Guests) {
+				if(Guest.equals(G)) {
+					Guest.checkIn(Integer.parseInt(RoomNumberDetail.getText()));
+				}
+			}
+			for(Room r : hotelRooms) {
+				if(r.getRoomNumber() == Integer.parseInt(RoomNumberDetail.getText())) {
+					r.checkIn(G);
+				}
+			}
+			saveGuest();
+			saveRoom();
+			guestMenu(e);
+		} catch (IllegalArgumentException IAE) {
+			if(IAE.getMessage().contains("already assigned")) {
+				assignError.setText(IAE.getMessage());
+				assignError.setOpacity(1);
+			}
+			else {
+				assignError.setText(IAE.getMessage());
+				assignError.setOpacity(1);
+			}
+		}
+		
 	}
 	public void removeStaff(ActionEvent e) throws IOException{
 		loadStaffList();
@@ -410,9 +457,6 @@ public class Menu extends Application implements Initializable{
 			}
 		}
 	}
-	private void removeStaff() {
-		
-	}
 	private void saveInfo() {
 		saveGuest();
 		saveRoom();
@@ -445,7 +489,11 @@ public class Menu extends Application implements Initializable{
 			FileWriter writer = new FileWriter("RoomList.txt", false);
 	        writer.write("");
 	        for (Room R : hotelRooms) {
-	        	writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight()+"\n");
+	        	if(R.getAvailability()) {
+	        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "\n");
+	        	} else {
+	        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "," + R.getGuest().getName() + "," + R.getGuest().getPhone() + "\n");
+	        	}
 	        }
 	        writer.close();
 		} catch (IOException e) {
@@ -456,7 +504,11 @@ public class Menu extends Application implements Initializable{
 		try {
 			FileWriter writer = new FileWriter("RoomDetail.txt", false);
 	        writer.write("");
-	        writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight());
+	        if(R.getAvailability()) {
+        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "\n");
+        	} else {
+        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "," + R.getGuest().getName() + "," + R.getGuest().getPhone() + "\n");
+        	}
 	        writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -549,8 +601,13 @@ public class Menu extends Application implements Initializable{
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
 			String[] parts = aString.split(",");
-			Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
-			return r1;
+			if(parts.length > 3) {
+				Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]), new Person(parts[3], parts[4]));
+				return r1;
+			} else {
+				Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
+				return r1;
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -565,8 +622,13 @@ public class Menu extends Application implements Initializable{
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
 				String[] parts = aString.split(",");
-				Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
-				hotelRooms.add(r1);
+				if(parts.length > 3) {
+					Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]), new Person(parts[3], parts[4]));
+					hotelRooms.add(r1);
+				} else {
+					Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
+					hotelRooms.add(r1);
+				}
 				RoomNums.add(Integer.parseInt(parts[0]));
 			}
 		} catch (FileNotFoundException e) {

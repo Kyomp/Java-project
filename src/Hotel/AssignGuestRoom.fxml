@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Hotel.Menu">
+   <children>
+      <SplitPane dividerPositions="0.3118" prefHeight="475.0" prefWidth="528.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Button layoutX="29.0" layoutY="46.0" mnemonicParsing="false" onAction="#guestMenu" prefHeight="30.0" prefWidth="104.0" text="Guest" />
+                  <Button layoutX="29.0" layoutY="112.0" mnemonicParsing="false" onAction="#staffMenu" prefHeight="30.0" prefWidth="104.0" text="Staff" />
+                  <Button layoutX="29.0" layoutY="172.0" mnemonicParsing="false" onAction="#managementMenu" prefHeight="30.0" prefWidth="104.0" text="Management" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <Text layoutX="122.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Room">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="38.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Room Number:" />
+                  <TextField fx:id="RoomNumberDetail" layoutX="38.0" layoutY="92.0" prefHeight="26.0" prefWidth="282.0" />
+                  <Button layoutX="154.0" layoutY="179.0" mnemonicParsing="false" onAction="#assignGuest" text="Assign" />
+                  <Text fx:id="assignError" fill="RED" layoutX="38.0" layoutY="131.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
