@@ -67,6 +67,8 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	TextField RoomTypeDetail;
 	@FXML
+	TextField RoomGuest;
+	@FXML
 	Text PhoneError;
 	@FXML
 	Text ID_error;
@@ -97,7 +99,6 @@ public class Menu extends Application implements Initializable{
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1){
-		System.out.println("Initialize is run");
 		for(Person G: Guests) {
 			System.out.println(G.getDetails());
 		}
@@ -227,6 +228,13 @@ public class Menu extends Application implements Initializable{
 			roomNumber.setText(Integer.toString(R.getRoomNumber()));
 			RoomTypeDetail.setText(R.getType());
 			roomCost.setText(Integer.toString(R.getCostPerNight()));
+			if(R.getGuest()==null) {
+				RoomGuest.setText("None");
+				RoomGuest.setDisable(true);
+			}
+			else {
+				RoomGuest.setText(R.getGuest().getName());
+			}
 			return;
 		}
 	}
