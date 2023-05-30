@@ -14,7 +14,17 @@ public class Person {
 			throw new IllegalArgumentException("The phone number is invalid");
 		}
 	}
-	
+	public Person(String name, String phoneNumber, int roomNumber, int unpaidCost) {
+		this.name = name;
+		if(phoneNumber.matches("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")) {
+			this.phoneNumber = phoneNumber;
+		}
+		else {
+			throw new IllegalArgumentException("The phone number is invalid");
+		}
+		this.roomNumber=roomNumber;
+		this.unpaidCost=unpaidCost;
+	}
 	public void charge(int price) {
 		unpaidCost += price;
 	}
@@ -47,5 +57,8 @@ public class Person {
 	}
 	public String getPhone() {
 		return phoneNumber;
+	}
+	public int getUnpaidCost() {
+		return unpaidCost;
 	}
 }

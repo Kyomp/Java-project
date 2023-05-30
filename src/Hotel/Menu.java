@@ -55,6 +55,16 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	TextField roomCost;
 	@FXML
+	TextField NameDetail;
+	@FXML
+	TextField PhoneDetail;
+	@FXML
+	TextField RoomNumberDetail;
+	@FXML
+	TextField RemainingChargeDetail;
+	@FXML
+	TextField IDDetail;
+	@FXML
 	Text PhoneError;
 	@FXML
 	Text ID_error;
@@ -103,6 +113,7 @@ public class Menu extends Application implements Initializable{
 				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 				            if(mouseEvent.getClickCount() == 2){
 				            	try {
+				            		saveGuestDetail(G);
 				            		guestDetailsMenu(guestInfo);
 				            	}
 				                catch(IOException e) {
@@ -133,6 +144,7 @@ public class Menu extends Application implements Initializable{
 				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 				            if(mouseEvent.getClickCount() == 2){
 				            	try {
+				            		saveStaffDetail(S);
 					                staffDetailsMenu(staffInfo);
 				            	}
 				            	catch(IOException e) {
@@ -190,7 +202,21 @@ public class Menu extends Application implements Initializable{
 			roomType.getItems().addAll(type);
 			return;
 		}
-//		if()
+		if(arg0.equals(getClass().getResource("GuestDetails.fxml"))) {
+			Person G = loadGuestDetail();
+			NameDetail.setText(G.getName());
+			PhoneDetail.setText(G.getPhone());
+			RoomNumberDetail.setText(G.getRoomNumber()!=-1?Integer.toString(G.getRoomNumber()):"None");
+			RemainingChargeDetail.setText(Integer.toString(G.getUnpaidCost()));
+			return;
+		}
+		if(arg0.equals(getClass().getResource("StaffDetails.fxml"))) {
+			Staff S = loadStaffDetail();
+			NameDetail.setText(S.getName());
+			PhoneDetail.setText(S.getPhone());
+			IDDetail.setText(S.getStaffID());
+			return;
+		}
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception{
@@ -364,8 +390,18 @@ public class Menu extends Application implements Initializable{
 			FileWriter writer = new FileWriter("GuestList.txt", false);
 	        writer.write("");
 	        for (Person G : Guests) {
-	        	writer.write(G.getName() + "," + G.getPhone()+"\n");
+	        	writer.write(G.getName() + "," + G.getPhone()+","+G.getRoomNumber()+","+G.getUnpaidCost()+"\n");
 	        }
+	        writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private void saveGuestDetail(Person G) {
+		try {
+			FileWriter writer = new FileWriter("GuestDetail.txt", false);
+	        writer.write("");
+	        writer.write(G.getName() + "," + G.getPhone()+","+G.getRoomNumber()+","+G.getUnpaidCost()+"\n");
 	        writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -395,6 +431,16 @@ public class Menu extends Application implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	private void saveStaffDetail(Staff S) {
+		try {
+			FileWriter writer = new FileWriter("StaffDetail.txt", false);
+	        writer.write("");
+	        writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone()+"\n");
+	        writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	private void loadStaffList() {
 		// TODO Auto-generated method stub
 		try {
@@ -412,7 +458,19 @@ public class Menu extends Application implements Initializable{
 			e.printStackTrace();
 		}
 	}
-
+	private Staff loadStaffDetail() {
+		try {
+			File guestFile = new File("StaffDetail.txt");
+			Scanner input = new Scanner(guestFile);
+			String aString = input.nextLine();
+			String[] parts = aString.split(",");
+			Staff s1 = new Staff(parts[0], parts[1], parts[2]);
+			return s1;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	private void loadGuests() {
 		// TODO Auto-generated method stub
 		try {
@@ -422,14 +480,26 @@ public class Menu extends Application implements Initializable{
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
 				String[] parts = aString.split(",");
-				Person p1 = new Person(parts[0], parts[1]);
+				Person p1 = new Person(parts[0], parts[1],Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
 				Guests.add(p1);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-
+	private Person loadGuestDetail() {
+		try {
+			File guestFile = new File("GuestDetail.txt");
+			Scanner input = new Scanner(guestFile);
+			String aString = input.nextLine();
+			String[] parts = aString.split(",");
+			Person p1 = new Person(parts[0], parts[1],Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
+			return p1;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	private void loadhotelRooms() {
 		// TODO Auto-generated method stub
 		try {
