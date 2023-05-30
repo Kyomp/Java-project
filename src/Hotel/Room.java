@@ -62,4 +62,11 @@ public class Room {
 	public int getCostPerNight() {
 		return costPerNight;
 	}
+	public boolean equals(Object object) {
+		Room r = (Room)object;
+		if(this.roomNumber == r.roomNumber) {
+			return true;
+		}
+		return false;
+	}
 }

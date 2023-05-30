@@ -61,4 +61,12 @@ public class Person {
 	public int getUnpaidCost() {
 		return unpaidCost;
 	}
+	@Override
+	public boolean equals(Object o) {
+		Person P = (Person) o;
+		if(this.name.equals(P.name)&&this.phoneNumber.equals(P.phoneNumber)) {
+			return true;
+		}
+		return false;
+	}
 }

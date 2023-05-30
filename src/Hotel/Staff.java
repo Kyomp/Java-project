@@ -39,4 +39,13 @@ public class Staff {
 	public String getPhone() {
 		return phoneNumber;
 	}
+	
+	@Override
+	public boolean equals(Object object) {
+		Staff s = (Staff)object;
+		if(this.staffID.equals(s.staffID)) {
+			return true;
+		}
+		return false;
+	}
 }

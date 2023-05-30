@@ -352,8 +352,31 @@ public class Menu extends Application implements Initializable{
 			PhoneError.setOpacity(1);
 		}
 	}
-	private void removeGuest() {
-		
+	public void removeGuest(ActionEvent e) throws IOException{
+		loadGuests();
+		Person G = loadGuestDetail();
+		Guests.remove(G);
+		for(Room r : hotelRooms) {
+			if(r.getGuest().equals(G)) {
+				r.checkOut();
+			}
+		}
+		saveGuest();
+		guestMenu(e);
+	}
+	public void removeStaff(ActionEvent e) throws IOException{
+		loadStaffList();
+		Staff S = loadStaffDetail();
+		staffList.remove(S);
+		saveStaff();
+		staffMenu(e);
+	}
+	public void removeRoom(ActionEvent e) throws IOException{
+		loadhotelRooms();
+		Room R = loadRoomDetail();
+		hotelRooms.remove(R);
+		saveRoom();
+		managementMenu(e);
 	}
 	public void addStaff(ActionEvent e) throws IOException{
 		try {
