@@ -102,7 +102,12 @@ public class Menu extends Application implements Initializable{
 				    public void handle(MouseEvent mouseEvent) {
 				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 				            if(mouseEvent.getClickCount() == 2){
-				                System.out.println("Double clicked");
+				            	try {
+				            		guestDetailsMenu(guestInfo);
+				            	}
+				                catch(IOException e) {
+				                	e.printStackTrace();
+				                }
 				            }
 				        }
 				    }
@@ -127,7 +132,12 @@ public class Menu extends Application implements Initializable{
 				    public void handle(MouseEvent mouseEvent) {
 				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 				            if(mouseEvent.getClickCount() == 2){
-				                System.out.println("Double clicked");
+				            	try {
+					                staffDetailsMenu(staffInfo);
+				            	}
+				            	catch(IOException e) {
+				            		e.printStackTrace();
+				            	}
 				            }
 				        }
 				    }
@@ -153,7 +163,12 @@ public class Menu extends Application implements Initializable{
 				    public void handle(MouseEvent mouseEvent) {
 				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 				            if(mouseEvent.getClickCount() == 2){
-				                System.out.println("Double clicked");
+				            	try {
+					                roomDetailsMenu(roomInfo);
+				            	}
+				            	catch(IOException e) {
+				            		e.printStackTrace();
+				            	}
 				            }
 				        }
 				    }
@@ -175,6 +190,7 @@ public class Menu extends Application implements Initializable{
 			roomType.getItems().addAll(type);
 			return;
 		}
+//		if()
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception{
@@ -226,6 +242,27 @@ public class Menu extends Application implements Initializable{
 	public void addStaffMenu(ActionEvent e) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("addStaff.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void guestDetailsMenu(Node e) throws IOException{
+		root = FXMLLoader.load(getClass().getResource("GuestDetails.fxml"));
+		stage = (Stage)(e.getScene().getWindow());
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void roomDetailsMenu(Node e) throws IOException{
+		root = FXMLLoader.load(getClass().getResource("RoomDetails.fxml"));
+		stage = (Stage)(e.getScene().getWindow());
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void staffDetailsMenu(Node e) throws IOException{
+		root = FXMLLoader.load(getClass().getResource("StaffDetails.fxml"));
+		stage = (Stage)(e.getScene().getWindow());
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
