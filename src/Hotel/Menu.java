@@ -65,6 +65,8 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	TextField IDDetail;
 	@FXML
+	TextField RoomTypeDetail;
+	@FXML
 	Text PhoneError;
 	@FXML
 	Text ID_error;
@@ -176,6 +178,7 @@ public class Menu extends Application implements Initializable{
 				        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 				            if(mouseEvent.getClickCount() == 2){
 				            	try {
+				            		saveRoomDetail(R);
 					                roomDetailsMenu(roomInfo);
 				            	}
 				            	catch(IOException e) {
@@ -215,6 +218,13 @@ public class Menu extends Application implements Initializable{
 			NameDetail.setText(S.getName());
 			PhoneDetail.setText(S.getPhone());
 			IDDetail.setText(S.getStaffID());
+			return;
+		}
+		if(arg0.equals(getClass().getResource("RoomDetails.fxml"))) {
+			Room R = loadRoomDetail();
+			roomNumber.setText(Integer.toString(R.getRoomNumber()));
+			RoomTypeDetail.setText(R.getType());
+			roomCost.setText(Integer.toString(R.getCostPerNight()));
 			return;
 		}
 	}
@@ -419,6 +429,16 @@ public class Menu extends Application implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	private void saveRoomDetail(Room R) {
+		try {
+			FileWriter writer = new FileWriter("RoomDetail.txt", false);
+	        writer.write("");
+	        writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight());
+	        writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	private void saveStaff() {
 		try {
 			FileWriter writer = new FileWriter("StaffList.txt", false);
@@ -500,6 +520,19 @@ public class Menu extends Application implements Initializable{
 		}
 		return null;
 	}
+	private Room loadRoomDetail() {
+		try {
+			File guestFile = new File("RoomDetail.txt");
+			Scanner input = new Scanner(guestFile);
+			String aString = input.nextLine();
+			String[] parts = aString.split(",");
+			Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
+			return r1;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	private void loadhotelRooms() {
 		// TODO Auto-generated method stub
 		try {
@@ -517,6 +550,7 @@ public class Menu extends Application implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	
 	private void loadValidItems() {
 		validItems.put("Coca Cola", 15000);
 		validItems.put("Water bottle", 10000);
