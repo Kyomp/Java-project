@@ -360,14 +360,16 @@ public class Menu extends Application implements Initializable{
 	}
 	public void removeGuest(ActionEvent e) throws IOException{
 		loadGuests();
+		loadhotelRooms();
 		Person G = loadGuestDetail();
-		Guests.remove(G);
 		for(Room r : hotelRooms) {
-			if(r.getGuest().equals(G)) {
+			if(r.getRoomNumber()==(G.getRoomNumber())) {
 				r.checkOut();
 			}
 		}
+		Guests.remove(G);
 		saveGuest();
+		saveRoom();
 		guestMenu(e);
 	}
 	public void assignGuest(ActionEvent e) throws IOException{
@@ -392,10 +394,16 @@ public class Menu extends Application implements Initializable{
 				}
 			}
 			for(Room r : hotelRooms) {
+				if(r.getRoomNumber() == G.getRoomNumber()) {
+					r.checkOut();
+				}
+			}
+			for(Room r : hotelRooms) {
 				if(r.getRoomNumber() == Integer.parseInt(RoomNumberDetail.getText())) {
 					r.checkIn(G);
 				}
 			}
+			
 			saveGuest();
 			saveRoom();
 			guestMenu(e);
@@ -420,9 +428,17 @@ public class Menu extends Application implements Initializable{
 	}
 	public void removeRoom(ActionEvent e) throws IOException{
 		loadhotelRooms();
+		loadGuests();
 		Room R = loadRoomDetail();
+		R.checkOut();
+		for(Person p : Guests) {
+			if(p.getRoomNumber()==(R.getRoomNumber())) {
+				p.checkOut();
+			}
+		}
 		hotelRooms.remove(R);
 		saveRoom();
+		saveGuest();
 		managementMenu(e);
 	}
 	public void addStaff(ActionEvent e) throws IOException{
