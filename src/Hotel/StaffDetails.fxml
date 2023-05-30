@@ -32,6 +32,8 @@
                   <Text layoutX="40.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff ID:" />
                   <TextField fx:id="IDDetail" editable="false" layoutX="40.0" layoutY="205.0" prefHeight="26.0" prefWidth="282.0" />
                   <Button layoutX="40.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeStaff" text="Remove" />
+                  <Text layoutX="40.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hourly Wage:" />
+                  <TextField fx:id="WageDetail" editable="false" layoutX="40.0" layoutY="263.0" prefHeight="25.0" prefWidth="282.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>

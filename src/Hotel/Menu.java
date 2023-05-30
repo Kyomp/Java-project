@@ -65,6 +65,8 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	TextField IDDetail;
 	@FXML
+	TextField WageDetail;
+	@FXML
 	TextField RoomTypeDetail;
 	@FXML
 	TextField RoomGuest;
@@ -72,6 +74,8 @@ public class Menu extends Application implements Initializable{
 	Text PhoneError;
 	@FXML
 	Text ID_error;
+	@FXML
+	Text lowWage;
 	@FXML
 	Text RoomError;
 	@FXML
@@ -83,10 +87,13 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	Spinner<Integer> ID_num;
 	@FXML
+	Spinner<Integer> HourlyWage;
+	@FXML
 	ChoiceBox<Character> ID_gender;
 	@FXML
 	ChoiceBox<String> roomType;
 	SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 999);
+	SpinnerValueFactory<Integer> valueFactory2 = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 2147483647);
 	public Menu() {
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
@@ -201,6 +208,8 @@ public class Menu extends Application implements Initializable{
 			ID_gender.getItems().addAll(gender);
 			valueFactory.setValue(1);
 			ID_num.setValueFactory(valueFactory);
+			valueFactory2.setValue(25000);
+			HourlyWage.setValueFactory(valueFactory2);
 			return;
 		}
 		if(arg0.equals(getClass().getResource("addRoom.fxml"))) {
@@ -221,6 +230,7 @@ public class Menu extends Application implements Initializable{
 			NameDetail.setText(S.getName());
 			PhoneDetail.setText(S.getPhone());
 			IDDetail.setText(S.getStaffID());
+			WageDetail.setText(Integer.toString(S.getHourlyWage()));
 			return;
 		}
 		if(arg0.equals(getClass().getResource("RoomDetails.fxml"))) {
@@ -307,6 +317,7 @@ public class Menu extends Application implements Initializable{
 		stage.show();
 	}
 	public void staffDetailsMenu(Node e) throws IOException{
+
 		root = FXMLLoader.load(getClass().getResource("StaffDetails.fxml"));
 		stage = (Stage)(e.getScene().getWindow());
 		scene = new Scene(root);
@@ -365,6 +376,24 @@ public class Menu extends Application implements Initializable{
 			PhoneError.setText(IAE.getMessage());
 			PhoneError.setOpacity(1);
 		}
+	}
+	public void CheckOut(ActionEvent e)throws IOException{
+		loadGuests();
+		loadhotelRooms();
+		Person G = loadGuestDetail();
+		for(Room r : hotelRooms) {
+			if(r.getRoomNumber()==(G.getRoomNumber())) {
+				r.checkOut();
+			}
+		}
+		for(Person p: Guests) {
+			if(p.equals(G)) {
+				p.checkOut();
+			}
+		}
+		saveGuest();
+		saveRoom();
+		guestMenu(e);
 	}
 	public void removeGuest(ActionEvent e) throws IOException{
 		loadGuests();
@@ -454,8 +483,8 @@ public class Menu extends Application implements Initializable{
 			loadStaffList();
 			PhoneError.setOpacity(0);
 			ID_error.setOpacity(0);
+			lowWage.setOpacity(0);
 			String numStringer;
-			System.out.println(ID_num.getValue());
 			if(ID_num.getValue() < 10) {
 				numStringer = "00" + ID_num.getValue().toString();
 			} else if (ID_num.getValue() < 100) {
@@ -467,7 +496,7 @@ public class Menu extends Application implements Initializable{
 			if(ID_List.contains(numStringer)) {
 				throw new IllegalArgumentException("The ID already exists");
 			}
-			staffList.add(new Staff(numStringer, Name.getText(),Phone.getText()));
+			staffList.add(new Staff(numStringer, Name.getText(),Phone.getText(),HourlyWage.getValue()));
 			saveStaff();
 			staffMenu(e);
 		}catch(IllegalArgumentException IAE) {
@@ -475,9 +504,13 @@ public class Menu extends Application implements Initializable{
 				PhoneError.setText(IAE.getMessage());
 				PhoneError.setOpacity(1);
 			}
-			else {
+			else if(IAE.getMessage().contains("ID")){
 				ID_error.setText(IAE.getMessage());
 				ID_error.setOpacity(1);
+			}
+			else {
+				lowWage.setText(IAE.getMessage());
+				lowWage.setOpacity(1);
 			}
 		}
 	}
@@ -543,7 +576,7 @@ public class Menu extends Application implements Initializable{
 			FileWriter writer = new FileWriter("StaffList.txt", false);
 	        writer.write("");
 	        for (Staff S : staffList) {
-	        	writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone()+"\n");
+	        	writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone() + "," + S.getHourlyWage() +"\n");
 	        }
 	        writer.close();
 		} catch (IOException e) {
@@ -554,7 +587,7 @@ public class Menu extends Application implements Initializable{
 		try {
 			FileWriter writer = new FileWriter("StaffDetail.txt", false);
 	        writer.write("");
-	        writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone()+"\n");
+	        writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone() + "," + S.getHourlyWage() +"\n");
 	        writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -569,7 +602,7 @@ public class Menu extends Application implements Initializable{
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
 				String[] parts = aString.split(",");
-				Staff s1 = new Staff(parts[0], parts[1], parts[2]);
+				Staff s1 = new Staff(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
 				staffList.add(s1);
 				ID_List.add(parts[0]);
 			}
@@ -583,7 +616,7 @@ public class Menu extends Application implements Initializable{
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
 			String[] parts = aString.split(",");
-			Staff s1 = new Staff(parts[0], parts[1], parts[2]);
+			Staff s1 = new Staff(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
 			return s1;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

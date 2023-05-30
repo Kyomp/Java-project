@@ -7,9 +7,10 @@ public class Staff {
 	private final String staffID;
 	private final String staffName;
 	private final String phoneNumber;
+	private final int hourlyWage;
 //	public static Set<String> ID_List = new HashSet<String>();
 	
-	public Staff(String staffID, String staffName, String phoneNumber) {
+	public Staff(String staffID, String staffName, String phoneNumber, int hourlyWage) {
 		
 		if(!staffID.matches("(F|M).*[0-9]{3}$")) {
 			throw new IllegalArgumentException("The ID input has incorrect format");
@@ -23,6 +24,12 @@ public class Staff {
 		}
 		else {
 			throw new IllegalArgumentException("The phone number is invalid");
+		}
+		if(hourlyWage<20000) {
+			throw new IllegalArgumentException("OI! Do you have no ethics?!!!");
+		}
+		else {
+			this.hourlyWage = hourlyWage;
 		}
 		this.staffName = staffName;
 //		Staff.ID_List.add(staffID);
@@ -47,5 +54,8 @@ public class Staff {
 			return true;
 		}
 		return false;
+	}
+	public int getHourlyWage() {
+		return hourlyWage;
 	}
 }

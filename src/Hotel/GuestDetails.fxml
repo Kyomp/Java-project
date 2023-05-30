@@ -33,8 +33,9 @@
                   <TextField fx:id="RoomNumberDetail" editable="false" layoutX="40.0" layoutY="205.0" prefHeight="26.0" prefWidth="282.0" />
                   <Text layoutX="40.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remaining Charge:" />
                   <TextField fx:id="RemainingChargeDetail" editable="false" layoutX="38.0" layoutY="263.0" prefHeight="26.0" prefWidth="282.0" />
-                  <Button layoutX="38.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeGuest" text="Remove" />
-                  <Button layoutX="136.0" layoutY="435.0" mnemonicParsing="false" onAction="#assignGuestRoomMenu" text="Assign Room" />
+                  <Button layoutX="245.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeGuest" text="Remove" />
+                  <Button layoutX="31.0" layoutY="435.0" mnemonicParsing="false" onAction="#assignGuestRoomMenu" text="Assign Room" />
+                  <Button layoutX="145.0" layoutY="435.0" mnemonicParsing="false" onAction="#CheckOut" text="Check Out" />
                </children></AnchorPane>
         </items>
       </SplitPane>
