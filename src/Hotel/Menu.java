@@ -536,7 +536,6 @@ public class Menu extends Application implements Initializable{
 		loadhotelRooms();
 		loadGuests();
 		Room R = loadRoomDetail();
-		R.checkOut();
 		for(Person p : Guests) {
 			if(p.getRoomNumber()==(R.getRoomNumber())) {
 				p.checkOut();
@@ -681,7 +680,7 @@ public class Menu extends Application implements Initializable{
 	}
 	private Staff loadStaffDetail() {
 		try {
-			staffList.clear();
+//			staffList.clear();
 			File guestFile = new File("StaffDetail.txt");
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
@@ -744,7 +743,7 @@ public class Menu extends Application implements Initializable{
 	private void loadhotelRooms() {
 		// TODO Auto-generated method stub
 		try {
-			hotelRooms.clear();
+//			hotelRooms.clear();
 			File guestFile = new File("RoomList.txt");
 			Scanner input = new Scanner(guestFile);
 			
