@@ -26,16 +26,15 @@
                         <Font size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="NameDetail" layoutX="38.0" layoutY="84.0" prefWidth="282.0" />
+                  <TextField fx:id="NameDetail" editable="false" layoutX="38.0" layoutY="84.0" prefWidth="282.0" />
                   <Text layoutX="38.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-                  <ChoiceBox fx:id="ChargeServices" layoutX="38.0" layoutY="146.0" prefHeight="26.0" prefWidth="220.0" />
+                  <ChoiceBox fx:id="ChargeServices" layoutX="38.0" layoutY="146.0" prefHeight="26.0" prefWidth="282.0" />
                   <Text layoutX="38.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service" />
                   <Text layoutX="38.0" layoutY="202.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Charge Amount" />
-                  <TextField fx:id="RemainingChargeDetail" layoutX="38.0" layoutY="206.0" prefWidth="282.0" />
-                  <Button layoutX="265.0" layoutY="146.0" mnemonicParsing="false" onAction="#chargeGuestService" text="Charge" />
+                  <TextField fx:id="RemainingChargeDetail" editable="false" layoutX="38.0" layoutY="206.0" prefWidth="282.0" />
                   <Button layoutX="207.0" layoutY="268.0" mnemonicParsing="false" onAction="#guestMenu" prefHeight="26.0" prefWidth="54.0" text="OK" />
-                  <Button layoutX="97.0" layoutY="269.0" mnemonicParsing="false" onAction="#chargeGuestRoom" text="Charge Room" />
-                  <Text fx:id="chargeRoomError" fill="RED" layoutX="38.0" layoutY="123.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Button layoutX="97.0" layoutY="269.0" mnemonicParsing="false" onAction="#chargeGuestRoom" text="Charge fee" />
+                  <Text fx:id="chargeRoomError" fill="RED" layoutX="43.0" layoutY="308.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                </children></AnchorPane>
         </items>
       </SplitPane>
