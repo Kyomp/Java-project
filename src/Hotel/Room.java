@@ -4,28 +4,22 @@ import java.util.List;
 
 public class Room {
 	private boolean availability;
-	private boolean clean_status;
 	private String type;
-	private Fridge fridge;
 	private Person guest;
 	private final int roomNumber;
 	private int costPerNight;
 	
 	public Room(int roomNumber, String type, int costPerNight) {
 		availability = true;
-		clean_status = true;
 		this.roomNumber = roomNumber;
 		this.type = type;
-		this.fridge = new Fridge();
 		this.costPerNight = costPerNight;
 		guest = null;
 	}
 	
 	public Room(int roomNumber, String type, int costPerNight, Person g) {
-        clean_status = true;
         this.roomNumber = roomNumber;
         this.type = type;
-        this.fridge = new Fridge();
         this.costPerNight = costPerNight;
         if(g==null){
                   this.guest = null;
@@ -39,10 +33,8 @@ public class Room {
 	
 	public Room(int roomNumber, List<String> fridgeContents, String type, int costPerNight) {
 		availability = true;
-		clean_status = true;
 		this.roomNumber = roomNumber;
 		this.type = type;
-		this.fridge = new Fridge(fridgeContents);
 		this.costPerNight = costPerNight;
 		guest = null;
 	}

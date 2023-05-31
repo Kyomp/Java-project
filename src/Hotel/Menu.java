@@ -41,7 +41,6 @@ public class Menu extends Application implements Initializable{
 	private ArrayList<Room> hotelRooms;
 	private ArrayList<Person> Guests;
 	private ArrayList<Staff> staffList;
-	private HashMap<String, Integer> validItems;
 	private HashMap<String, Integer> serviceList = Service.getServiceList();
 	private Set<String> ID_List;
 	private Set<Integer> RoomNums;
@@ -104,10 +103,8 @@ public class Menu extends Application implements Initializable{
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
 		staffList = new ArrayList<Staff>();
-		validItems = new HashMap<String,Integer>();
 		ID_List = new HashSet<String>();
 		RoomNums = new HashSet<Integer>();
-		Fridge.addAllValidItems(validItems);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -392,10 +389,10 @@ public class Menu extends Application implements Initializable{
 		try {
 			loadGuests();
 			Guests.add(new Person(Name.getText(),Phone.getText()));
-			System.out.println("addGuest is run");
-			for(Person G: Guests) {
-				System.out.println(G.getDetails());
-			}
+//			System.out.println("addGuest is run");
+//			for(Person G: Guests) {
+//				System.out.println(G.getDetails());
+//			}
 			saveGuest();
 			guestMenu(e);
 		}catch(IllegalArgumentException IAE) {
@@ -762,13 +759,6 @@ public class Menu extends Application implements Initializable{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-	}
-	private void loadValidItems() {
-		validItems.put("Coca Cola", 15000);
-		validItems.put("Water bottle", 10000);
-		validItems.put("Pepsi", 14500);
-		validItems.put("Heineken", 20000);
-		validItems.put("Bud Light", 17000);
 	}
 	public static void main(String[] args) {
 		Menu menu = new Menu();
