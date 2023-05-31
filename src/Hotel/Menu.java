@@ -41,6 +41,7 @@ public class Menu extends Application implements Initializable{
 	private ArrayList<Room> hotelRooms;
 	private ArrayList<Person> Guests;
 	private ArrayList<Staff> staffList;
+	private HashMap<String, Integer> validItems;
 	private HashMap<String, Integer> serviceList = Service.getServiceList();
 	private Set<String> ID_List;
 	private Set<Integer> RoomNums;
@@ -103,8 +104,10 @@ public class Menu extends Application implements Initializable{
 		hotelRooms = new ArrayList<Room>();
 		Guests = new ArrayList<Person>();
 		staffList = new ArrayList<Staff>();
+		validItems = new HashMap<String,Integer>();
 		ID_List = new HashSet<String>();
 		RoomNums = new HashSet<Integer>();
+		Fridge.addAllValidItems(validItems);
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -255,11 +258,12 @@ public class Menu extends Application implements Initializable{
 			Person G = loadGuestDetail();
 			NameDetail.setText(G.getName());
 			ArrayList<String> prices = new ArrayList<String>();
+			prices.add("Room fee");
 			for(Map.Entry<String, Integer> entry : serviceList.entrySet()) {
 				prices.add(entry.getKey());
 			}
 			ChargeServices.getItems().addAll(prices);
-			ChargeServices.setValue("None");
+			ChargeServices.setValue("Room fee");
 			RemainingChargeDetail.setText(Integer.toString(G.getUnpaidCost()));
 			return;
 		}
@@ -389,10 +393,10 @@ public class Menu extends Application implements Initializable{
 		try {
 			loadGuests();
 			Guests.add(new Person(Name.getText(),Phone.getText()));
-//			System.out.println("addGuest is run");
-//			for(Person G: Guests) {
-//				System.out.println(G.getDetails());
-//			}
+			System.out.println("addGuest is run");
+			for(Person G: Guests) {
+				System.out.println(G.getDetails());
+			}
 			saveGuest();
 			guestMenu(e);
 		}catch(IllegalArgumentException IAE) {
@@ -479,9 +483,7 @@ public class Menu extends Application implements Initializable{
 		}
 		
 	}
-	public void chargeGuestService(ActionEvent e) throws IOException{
-		loadGuests();
-		Person P = loadGuestDetail();
+	public void chargeGuestService(Person P){
 		Integer cost = serviceList.get(ChargeServices.getValue());
 		P.charge(cost);
 		for (Person G : Guests) {
@@ -489,33 +491,40 @@ public class Menu extends Application implements Initializable{
 				G.charge(cost);
 			}
 		}
-		saveGuestDetail(P);
 		saveGuest();
-		chargeGuestMenu(e);
 	}
 	public void chargeGuestRoom(ActionEvent e) throws IOException{
 		try {
 			chargeRoomError.setOpacity(0);
-			loadGuests();
 			loadhotelRooms();
+			loadGuests();
 			Person P = loadGuestDetail();
-			if(P.getRoomNumber() == -1) {
-				throw new IllegalArgumentException("This guest is not staying in a room.");
+			
+			if(ChargeServices.getValue() == null) {
+				throw new IllegalArgumentException("Service not selected");
 			}
-			for(Room r : hotelRooms) {
-				if(r.getRoomNumber() == P.getRoomNumber()) {
-					P.charge(r.getCostPerNight());
-					saveGuestDetail(P);
-					for (Person G : Guests) {
-						if(G.equals(P)) {
-							G.charge(r.getCostPerNight());
+			if(ChargeServices.getValue().equals("Room fee")) {
+				if(P.getRoomNumber() == -1) {
+					throw new IllegalArgumentException("This guest is not staying in a room.");
+				}
+				for(Room r : hotelRooms) {
+					if(r.getRoomNumber() == P.getRoomNumber()) {
+						for (Person G : Guests) {
+							if(G.equals(P)) {
+								G.charge(r.getCostPerNight());
+								saveGuestDetail(G);
+								break;
+							}
 						}
+						break;
 					}
-					break;
 				}
 			}
+			else {
+				chargeGuestService(P);
+			}
 			saveGuest();
-			chargeGuestMenu(e);
+			guestMenu(e);
 		} catch (IllegalArgumentException IAE) {
 			chargeRoomError.setText(IAE.getMessage());
 			chargeRoomError.setOpacity(1);
@@ -663,7 +672,7 @@ public class Menu extends Application implements Initializable{
 		try {
 			File guestFile = new File("StaffList.txt");
 			Scanner input = new Scanner(guestFile);
-			
+			staffList.clear();
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
 				String[] parts = aString.split(",");
@@ -677,7 +686,6 @@ public class Menu extends Application implements Initializable{
 	}
 	private Staff loadStaffDetail() {
 		try {
-//			staffList.clear();
 			File guestFile = new File("StaffDetail.txt");
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
@@ -692,9 +700,9 @@ public class Menu extends Application implements Initializable{
 	private void loadGuests() {
 		// TODO Auto-generated method stub
 		try {
-			Guests.clear();
 			File guestFile = new File("GuestList.txt");
 			Scanner input = new Scanner(guestFile);
+			Guests.clear();
 			
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
@@ -740,7 +748,6 @@ public class Menu extends Application implements Initializable{
 	private void loadhotelRooms() {
 		// TODO Auto-generated method stub
 		try {
-//			hotelRooms.clear();
 			File guestFile = new File("RoomList.txt");
 			Scanner input = new Scanner(guestFile);
 			
@@ -759,6 +766,13 @@ public class Menu extends Application implements Initializable{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	private void loadValidItems() {
+		validItems.put("Coca Cola", 15000);
+		validItems.put("Water bottle", 10000);
+		validItems.put("Pepsi", 14500);
+		validItems.put("Heineken", 20000);
+		validItems.put("Bud Light", 17000);
 	}
 	public static void main(String[] args) {
 		Menu menu = new Menu();
