@@ -33,9 +33,10 @@
                   <TextField fx:id="RoomNumberDetail" editable="false" layoutX="40.0" layoutY="205.0" prefHeight="26.0" prefWidth="282.0" />
                   <Text layoutX="40.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Remaining Charge:" />
                   <TextField fx:id="RemainingChargeDetail" editable="false" layoutX="38.0" layoutY="263.0" prefHeight="26.0" prefWidth="282.0" />
-                  <Button layoutX="245.0" layoutY="435.0" mnemonicParsing="false" onAction="#removeGuest" text="Remove" />
-                  <Button layoutX="31.0" layoutY="435.0" mnemonicParsing="false" onAction="#assignGuestRoomMenu" text="Assign Room" />
-                  <Button layoutX="145.0" layoutY="435.0" mnemonicParsing="false" onAction="#CheckOut" text="Check Out" />
+                  <Button layoutX="208.0" layoutY="409.0" mnemonicParsing="false" onAction="#removeGuest" prefWidth="92.0" text="Remove" />
+                  <Button layoutX="58.0" layoutY="365.0" mnemonicParsing="false" onAction="#assignGuestRoomMenu" prefHeight="26.0" prefWidth="92.0" text="Assign Room" />
+                  <Button layoutX="58.0" layoutY="409.0" mnemonicParsing="false" onAction="#CheckOut" prefHeight="26.0" prefWidth="92.0" text="Check Out" />
+                  <Button layoutX="208.0" layoutY="365.0" mnemonicParsing="false" onAction="#chargeGuestMenu" prefHeight="26.0" prefWidth="92.0" text="Charge" />
                </children></AnchorPane>
         </items>
       </SplitPane>

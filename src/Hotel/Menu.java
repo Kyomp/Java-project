@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.Set;
@@ -41,6 +42,7 @@ public class Menu extends Application implements Initializable{
 	private ArrayList<Person> Guests;
 	private ArrayList<Staff> staffList;
 	private HashMap<String, Integer> validItems;
+	private HashMap<String, Integer> serviceList = Service.getServiceList();
 	private Set<String> ID_List;
 	private Set<Integer> RoomNums;
 	private Parent root;
@@ -83,6 +85,8 @@ public class Menu extends Application implements Initializable{
 	@FXML
 	Text assignError;
 	@FXML
+	Text chargeRoomError;
+	@FXML
 	FlowPane List;
 	@FXML
 	Spinner<Integer> ID_num;
@@ -90,6 +94,8 @@ public class Menu extends Application implements Initializable{
 	Spinner<Integer> HourlyWage;
 	@FXML
 	ChoiceBox<Character> ID_gender;
+	@FXML
+	ChoiceBox<String> ChargeServices;
 	@FXML
 	ChoiceBox<String> roomType;
 	SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 999);
@@ -247,6 +253,18 @@ public class Menu extends Application implements Initializable{
 			}
 			return;
 		}
+		if(arg0.equals(getClass().getResource("ChargeGuest.fxml"))) {
+			loadGuests();
+			Person G = loadGuestDetail();
+			NameDetail.setText(G.getName());
+			ArrayList<String> prices = new ArrayList<String>();
+			for(Map.Entry<String, Integer> entry : serviceList.entrySet()) {
+				prices.add(entry.getKey());
+			}
+			ChargeServices.getItems().addAll(prices);
+			RemainingChargeDetail.setText(Integer.toString(G.getUnpaidCost()));
+			return;
+		}
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception{
@@ -326,6 +344,13 @@ public class Menu extends Application implements Initializable{
 	}
 	public void assignGuestRoomMenu(ActionEvent e) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("AssignGuestRoom.fxml"));
+		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public void chargeGuestMenu(ActionEvent e) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("ChargeGuest.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -453,6 +478,51 @@ public class Menu extends Application implements Initializable{
 				assignError.setText(IAE.getMessage());
 				assignError.setOpacity(1);
 			}
+		}
+		
+	}
+	public void chargeGuestService(ActionEvent e) throws IOException{
+		loadGuests();
+		Person P = loadGuestDetail();
+		Integer cost = serviceList.get(ChargeServices.getValue());
+		P.charge(cost);
+		for (Person G : Guests) {
+			if(G.equals(P)) {
+				G.charge(cost);
+			}
+		}
+		saveGuestDetail(P);
+		saveGuest();
+		chargeGuestMenu(e);
+	}
+	public void chargeGuestRoom(ActionEvent e) throws IOException{
+		try {
+			chargeRoomError.setOpacity(0);
+			loadGuests();
+			Person P = loadGuestDetail();
+			if(P.getRoomNumber() == -1) {
+				throw new IllegalArgumentException("This guest is not staying in a room.");
+			}
+			if(ChargeServices.getValue() == null) {
+				throw new IllegalArgumentException("Service not selected");
+			}
+			for(Room r : hotelRooms) {
+				if(r.getRoomNumber() == P.getRoomNumber()) {
+					P.charge(r.getCostPerNight());
+					saveGuestDetail(P);
+					for (Person G : Guests) {
+						if(G.equals(P)) {
+							G.charge(r.getCostPerNight());
+						}
+					}
+					break;
+				}
+			}
+			saveGuest();
+			chargeGuestMenu(e);
+		} catch (IllegalArgumentException IAE) {
+			chargeRoomError.setText(IAE.getMessage());
+			chargeRoomError.setOpacity(1);
 		}
 		
 	}
@@ -692,7 +762,6 @@ public class Menu extends Application implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	
 	private void loadValidItems() {
 		validItems.put("Coca Cola", 15000);
 		validItems.put("Water bottle", 10000);
