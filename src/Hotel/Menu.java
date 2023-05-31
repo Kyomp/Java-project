@@ -760,13 +760,6 @@ public class Menu extends Application implements Initializable{
 			e.printStackTrace();
 		}
 	}
-	private void loadValidItems() {
-		validItems.put("Coca Cola", 15000);
-		validItems.put("Water bottle", 10000);
-		validItems.put("Pepsi", 14500);
-		validItems.put("Heineken", 20000);
-		validItems.put("Bud Light", 17000);
-	}
 	public static void main(String[] args) {
 		Menu menu = new Menu();
 		launch(args);
