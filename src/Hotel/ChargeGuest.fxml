@@ -35,7 +35,7 @@
                   <Button layoutX="265.0" layoutY="146.0" mnemonicParsing="false" onAction="#chargeGuestService" text="Charge" />
                   <Button layoutX="207.0" layoutY="268.0" mnemonicParsing="false" onAction="#guestMenu" prefHeight="26.0" prefWidth="54.0" text="OK" />
                   <Button layoutX="97.0" layoutY="269.0" mnemonicParsing="false" onAction="#chargeGuestRoom" text="Charge Room" />
-                  <Text fx:id="chargeRoomError" fill="RED" layoutX="43.0" layoutY="308.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text fx:id="chargeRoomError" fill="RED" layoutX="38.0" layoutY="123.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                </children></AnchorPane>
         </items>
       </SplitPane>

@@ -262,6 +262,7 @@ public class Menu extends Application implements Initializable{
 				prices.add(entry.getKey());
 			}
 			ChargeServices.getItems().addAll(prices);
+			ChargeServices.setValue("None");
 			RemainingChargeDetail.setText(Integer.toString(G.getUnpaidCost()));
 			return;
 		}
@@ -499,12 +500,10 @@ public class Menu extends Application implements Initializable{
 		try {
 			chargeRoomError.setOpacity(0);
 			loadGuests();
+			loadhotelRooms();
 			Person P = loadGuestDetail();
 			if(P.getRoomNumber() == -1) {
 				throw new IllegalArgumentException("This guest is not staying in a room.");
-			}
-			if(ChargeServices.getValue() == null) {
-				throw new IllegalArgumentException("Service not selected");
 			}
 			for(Room r : hotelRooms) {
 				if(r.getRoomNumber() == P.getRoomNumber()) {
@@ -682,6 +681,7 @@ public class Menu extends Application implements Initializable{
 	}
 	private Staff loadStaffDetail() {
 		try {
+			staffList.clear();
 			File guestFile = new File("StaffDetail.txt");
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
@@ -696,6 +696,7 @@ public class Menu extends Application implements Initializable{
 	private void loadGuests() {
 		// TODO Auto-generated method stub
 		try {
+			Guests.clear();
 			File guestFile = new File("GuestList.txt");
 			Scanner input = new Scanner(guestFile);
 			
@@ -743,6 +744,7 @@ public class Menu extends Application implements Initializable{
 	private void loadhotelRooms() {
 		// TODO Auto-generated method stub
 		try {
+			hotelRooms.clear();
 			File guestFile = new File("RoomList.txt");
 			Scanner input = new Scanner(guestFile);
 			
