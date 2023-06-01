@@ -741,6 +741,7 @@ public class Menu extends Application implements Initializable{
 	private void loadhotelRooms() {
 		// TODO Auto-generated method stub
 		try {
+			hotelRooms.clear();
 			File guestFile = new File("RoomList.txt");
 			Scanner input = new Scanner(guestFile);
 			
