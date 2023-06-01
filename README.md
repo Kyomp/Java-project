@@ -75,3 +75,29 @@ The add room menu has 3 fields: Room Number, Type, and Cost per Night. If the ro
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/5996883b-3576-4b46-93e5-4d1c11c20853)
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/3afba128-5b57-4e80-88b7-034be518b5c5)
 
+On each lists, if the box is double-clicked, it will navigate to the details window that shows the detail of selected object.
+![image](https://github.com/Kyomp/Java-project/assets/91313923/884ec5bc-9584-44fc-abae-f481d706d819)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/487132ae-a942-4c5c-b31e-179aee8a0753)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/f54426a0-4af7-4029-9611-7aa00088f016)
+
+The Guest details shows the name, phone number, room nunber, and remaining charge. It also has four buttons: assign room, charge, check out, and remove.
+
+Assign room button will navigate to assign room window that enable user to input a room nunber for the guest to stay. If a room input is already occupied, it will show an error message
+
+![image](https://github.com/Kyomp/Java-project/assets/91313923/88c7cb86-c835-41f7-9d81-f658c1314353)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/0cdec6a4-d825-40ab-8e5a-b16ecfc83b19)
+
+Charge button will lead into a charge guest menu that displays the guest name and remaining charge amount, a choice box is also present to choose which service to charge that sets the room as the charge choice for the guest. If a guest is not staying in a room and they are charged with room fee, an error message will show. Charge button is to add charge amount to the guest, and the ok button is to go back to the guest list.
+
+![image](https://github.com/Kyomp/Java-project/assets/91313923/3f36cbde-33f6-42b0-ac1f-9a8c106648ea)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/15909538-fa9e-44c4-9222-e17caeed0102)
+
+Check out button will remove room number from the selected guest and directly go back to guest list. Same also goes to remove button, that will delete the selected guest and go back to the list page.
+
+Now, in the staff detail window, it will show the staff name, phone number, staff ID, and hourly wage. It also have remove button to delete the selected staff
+
+![image](https://github.com/Kyomp/Java-project/assets/91313923/5e1adfa5-c815-4f3c-ba06-9acdea605004)
+
+In the room detail window, the room number, type, cost per night and the current guest's name. A remove button is also present to delete a room from the program.
+
+![image](https://github.com/Kyomp/Java-project/assets/91313923/5505ba57-6cae-43d4-8c22-c324978eb498)
