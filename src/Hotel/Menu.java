@@ -218,6 +218,7 @@ public class Menu extends Application implements Initializable{
 		if(arg0.equals(getClass().getResource("addRoom.fxml"))) {
 			String[] type = {"Standard", "Special Standard", "Deluxe", "Executive"};
 			roomType.getItems().addAll(type);
+			roomType.setValue("Standard");
 			return;
 		}
 		if(arg0.equals(getClass().getResource("GuestDetails.fxml"))) {
