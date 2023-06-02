@@ -76,6 +76,7 @@ The add room menu has 3 fields: Room Number, Type, and Cost per Night. If the ro
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/3afba128-5b57-4e80-88b7-034be518b5c5)
 
 On each lists, if the box is double-clicked, it will navigate to the details window that shows the detail of selected object.
+
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/884ec5bc-9584-44fc-abae-f481d706d819)
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/487132ae-a942-4c5c-b31e-179aee8a0753)
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/f54426a0-4af7-4029-9611-7aa00088f016)
