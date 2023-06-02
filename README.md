@@ -51,7 +51,7 @@ The user interface have 3 main buttons located in the left side of the interface
 
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/d01f7533-7d96-4356-933e-c6acb0ebd540)
 
-If those buttons are clicked it will show each aspect's lists (it will navigate to another window that has a list display that is shown in form of a box):
+If those buttons are clicked it will show each aspect's lists of objects (it will navigate to another window that has a list display that is shown in form of a box):
 
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/eccc3ee8-2c55-4a77-9884-7473eb93167d)
 ![image](https://github.com/Kyomp/Java-project/assets/91313923/4bc6f4aa-0396-4a72-9f13-b2b0a377abde)
