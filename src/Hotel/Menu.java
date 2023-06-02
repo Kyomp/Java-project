@@ -209,6 +209,7 @@ public class Menu extends Application implements Initializable{
 		if(arg0.equals(getClass().getResource("addStaff.fxml"))) {
 			Character[] gender = {'F','M'};
 			ID_gender.getItems().addAll(gender);
+			ID_gender.setValue('F');
 			valueFactory.setValue(1);
 			ID_num.setValueFactory(valueFactory);
 			valueFactory2.setValue(25000);
