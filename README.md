@@ -46,16 +46,34 @@ We created a user interface using fxmls files with the help of SceneBuilder soft
 - javafx.scene.text.Text
 - javafx.stage.Stage
 
+# Features
+**Guests**
+- View list of guests
+- View details of a selected guest
+- Adding new guests
+- Removing existing guests
+- Assigning guests to a room
+- Check out guests from their room
+- Charging services fee to guests
+
+**Staffs**
+- View list of staffs
+- View details of a selected staff
+- Adding new staffs
+- Removing existing staffs
+
+**Rooms**
+- View list of rooms
+- View details of selected rooms
+- Adding new rooms
+- Removing existing rooms
+
 # Manual Guide
 The user interface have 3 main buttons located in the left side of the interface: "Guest," "Staff," and "Management":
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/d01f7533-7d96-4356-933e-c6acb0ebd540)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/64da97b8-de0e-4411-bb5c-a8396d50ba7b)
 
 If those buttons are clicked it will show each aspect's lists of objects (it will navigate to another window that has a list display that is shown in form of a box):
-
-![image](https://github.com/Kyomp/Java-project/assets/91313923/eccc3ee8-2c55-4a77-9884-7473eb93167d)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/4bc6f4aa-0396-4a72-9f13-b2b0a377abde)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/3af36143-a05e-40a3-b4a0-fcb156192f66)
 
 Each of them has an "add" button that will navigate to each aspect's add window to append the list with new data object.
 
