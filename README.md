@@ -99,19 +99,21 @@ The add room menu has 3 fields: Room Number, Type, and Cost per Night. If the ro
 
 On each lists, if the box is double-clicked, it will navigate to the details window that shows the detail of selected object.
 
-
+![image](https://github.com/Kyomp/Java-project/assets/91313923/ac95b4a1-27a2-4969-8b71-c3005bb6ef11)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/cabe0ba9-4296-45cf-8521-f0fe3517c293)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/ec9e2820-619e-4ead-8ab0-b60bb34ae5f7)
 
 The Guest details shows the name, phone number, room nunber, and remaining charge. It also has four buttons: assign room, charge, check out, and remove.
 
-Assign room button will navigate to assign room window that enable user to input a room nunber for the guest to stay. If a room input is already occupied, it will show an error message
+Assign room button will navigate to assign room window that enable user to input a room nunber for the guest to stay. If a room input is already occupied or the room does not exist, it will show an error message.
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/88c7cb86-c835-41f7-9d81-f658c1314353)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/0cdec6a4-d825-40ab-8e5a-b16ecfc83b19)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/2fa6bdb5-b9ab-4f5b-8b48-6662a1347ae0)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/b274298d-6aec-4ae2-9a45-d081f09c5c33)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/3cf201ff-3562-41b1-9a3d-bce6a50173d7)
 
 Charge button will lead into a charge guest menu that displays the guest name and remaining charge amount, a choice box is also present to choose which service to charge that sets the room as the charge choice for the guest. If a guest is not staying in a room and they are charged with room fee, an error message will show. Charge button is to add charge amount to the guest, and the ok button is to go back to the guest list.
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/3f36cbde-33f6-42b0-ac1f-9a8c106648ea)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/15909538-fa9e-44c4-9222-e17caeed0102)
+
 
 Check out button will remove room number from the selected guest and directly go back to guest list. Same also goes to remove button, that will delete the selected guest and go back to the list page.
 
