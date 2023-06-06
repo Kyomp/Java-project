@@ -113,14 +113,15 @@ Assign room button will navigate to assign room window that enable user to input
 
 Charge button will lead into a charge guest menu that displays the guest name and remaining charge amount, a choice box is also present to choose which service to charge that sets the room as the charge choice for the guest. If a guest is not staying in a room and they are charged with room fee, an error message will show. Charge button is to add charge amount to the guest, and the ok button is to go back to the guest list.
 
-
+![image](https://github.com/Kyomp/Java-project/assets/91313923/51b40301-1482-4bba-ac75-b67ef5cbac55)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/d3de7ace-f38a-406a-ae11-a79ff6e880fe)
 
 Check out button will remove room number from the selected guest and directly go back to guest list. Same also goes to remove button, that will delete the selected guest and go back to the list page.
 
-Now, in the staff detail window, it will show the staff name, phone number, staff ID, and hourly wage. It also have remove button to delete the selected staff
+Now, in the staff detail window, it will show the staff name, phone number, staff ID, and hourly wage. It also has remove button to delete the selected staff
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/5e1adfa5-c815-4f3c-ba06-9acdea605004)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/149bbcf1-dad3-40a9-ab48-9c07c7674980)
 
 In the room detail window, the room number, type, cost per night and the current guest's name. A remove button is also present to delete a room from the program.
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/5505ba57-6cae-43d4-8c22-c324978eb498)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/24ba849e-92ec-4970-8752-b14c762d1d0a)
