@@ -75,29 +75,31 @@ The user interface have 3 main buttons located in the left side of the interface
 
 If those buttons are clicked it will show each aspect's lists of objects (it will navigate to another window that has a list display that is shown in form of a box):
 
+![image](https://github.com/Kyomp/Java-project/assets/91313923/d86b0329-fe1b-40c5-82e2-ad2a71f8c685)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/dc02cf27-04a4-467d-85d2-b682c9342301)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/22f1d858-dd1f-452e-b965-5c82327cb27d)
+
 Each of them has an "add" button that will navigate to each aspect's add window to append the list with new data object.
 
 the add guest menu has 2 field that can be filled in. You can fill a name and a phone number. The accepted phone number are home and mobile that either contains a '+' in front or not. A phone number with wrong format will produce an error message shown in the red text below.
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/e8a2e873-e419-40dd-bb4d-796fad18f87f)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/78e27697-5b67-4391-b43e-ae0337bb90a9)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/ac4cee34-f848-4d3d-bfc7-eaa37ca3d996)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/898059fb-2147-45bf-9a1e-e6c7bbbb11a5)
 
 The add staff menu has 4 fields to be filled/modified: Name, Phone Number, Staff ID, and Hourly Wage. Phone number format is the same as before. Staff ID consist of a choice box for "M" for male and "F" for female and a number field (max 3 digit). If an ID already exist, an error message is shown. Hourly wage has a minimum of 2000 and below that will show an error message.
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/865fd0d0-1cba-4560-a15b-70aaa877b1c5)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/104bc75e-1863-49f9-a7ac-adb4af5508aa)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/4cc03247-568a-4a56-afd9-8d98058c3282)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/f813c7e9-8d6d-4733-950f-1cab3028e145)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/12630dc7-bd25-4500-b8b3-62e075dc8473)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/c48a58e5-c750-4bf8-a6ba-06785138b72c)
 
 The add room menu has 3 fields: Room Number, Type, and Cost per Night. If the room number is filled with a number that is taken by existing room, an error message will be shown
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/5996883b-3576-4b46-93e5-4d1c11c20853)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/3afba128-5b57-4e80-88b7-034be518b5c5)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/d829fcae-6a15-4153-bb60-957682865b16)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/71f2d305-9775-40b0-be6e-d06c7b8080c5)
 
 On each lists, if the box is double-clicked, it will navigate to the details window that shows the detail of selected object.
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/884ec5bc-9584-44fc-abae-f481d706d819)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/487132ae-a942-4c5c-b31e-179aee8a0753)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/f54426a0-4af7-4029-9611-7aa00088f016)
+
 
 The Guest details shows the name, phone number, room nunber, and remaining charge. It also has four buttons: assign room, charge, check out, and remove.
 
