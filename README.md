@@ -8,7 +8,7 @@ The list of guests, staffs, and rooms are stored in an arraylist and txt file. T
 
 We created a user interface using fxmls files with the help of SceneBuilder software. It enables better interaction with buttons and navigation and better list visualization
 
-The list of libraries used are:
+# The list of libraries
 - java.io.File
 - java.io.FileNotFoundException
 - java.io.FileWriter
