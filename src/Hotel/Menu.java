@@ -117,17 +117,17 @@ public class Menu extends Application implements Initializable{
 			loadGuests();
 			for(Person G: Guests) {
 				VBox guestInfo = new VBox();
-				if(G.getRoomNumber() == -1) {
-					guestInfo.setStyle("-fx-background-color: \"#ffdb78\";");
-				} else {
-					guestInfo.setStyle("-fx-background-color: \"#ffbaf7\";");
-				}
 				guestInfo.getChildren().add(new Text(G.getName()));
 				guestInfo.getChildren().add(new Text(G.getPhone()));
 				guestInfo.getChildren().add(new Text(G.getRoomNumber()!=-1?Integer.toString(G.getRoomNumber()):"None"));
 				guestInfo.setAlignment(Pos.TOP_CENTER);
 				guestInfo.setPrefWidth(80);
-				guestInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
+				guestInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,new CornerRadii(10.0),null)));
+				if(G.getRoomNumber() == -1) {
+					guestInfo.setStyle("-fx-background-color: \"#ffdb78\"; -fx-background-radius: 10px;");
+				} else {
+					guestInfo.setStyle("-fx-background-color: \"#ffbaf7\"; -fx-background-radius: 10px;");
+				}
 				guestInfo.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				    @Override
 				    public void handle(MouseEvent mouseEvent) {
@@ -153,13 +153,13 @@ public class Menu extends Application implements Initializable{
 			loadStaffList();
 			for(Staff S: staffList) {
 				VBox staffInfo = new VBox();
-				staffInfo.setStyle("-fx-background-color: \"#ffdb78\";");
+				staffInfo.setStyle("-fx-background-color: \"#ffdb78\"; -fx-background-radius: 10px;");
 				staffInfo.getChildren().add(new Text(S.getName()));
 				staffInfo.getChildren().add(new Text(S.getPhone()));
 				staffInfo.getChildren().add(new Text(S.getStaffID()));
 				staffInfo.setAlignment(Pos.TOP_CENTER);
 				staffInfo.setPrefWidth(80);
-				staffInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
+				staffInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,new CornerRadii(10.0),null)));
 				staffInfo.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				    @Override
 				    public void handle(MouseEvent mouseEvent) {
@@ -186,9 +186,9 @@ public class Menu extends Application implements Initializable{
 			for(Room R: hotelRooms) {
 				VBox roomInfo = new VBox();
 				if(R.getAvailability() == true) {
-					roomInfo.setStyle("-fx-background-color: \"#ffdb78\";");
+					roomInfo.setStyle("-fx-background-color: \"#ffdb78\"; -fx-background-radius: 10px;");
 				} else {
-					roomInfo.setStyle("-fx-background-color: \"#ff5454\";");
+					roomInfo.setStyle("-fx-background-color: \"#ff5454\"; -fx-background-radius: 10px;");
 				}
 				roomInfo.getChildren().add(new Text(Integer.toString(R.getRoomNumber())));
 				roomInfo.getChildren().add(new Text(R.getType()));
@@ -196,7 +196,7 @@ public class Menu extends Application implements Initializable{
 				roomInfo.getChildren().add(new Text(R.getAvailability()?"Available":"Occupied"));
 				roomInfo.setPrefWidth(95);
 				roomInfo.setAlignment(Pos.TOP_CENTER);
-				roomInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,null,null)));
+				roomInfo.setBorder(new Border(new BorderStroke(null,BorderStrokeStyle.SOLID,new CornerRadii(10.0),null)));
 				roomInfo.setOnMouseClicked(new EventHandler<MouseEvent>() {
 				    @Override
 				    public void handle(MouseEvent mouseEvent) {
