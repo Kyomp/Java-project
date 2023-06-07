@@ -14,8 +14,6 @@ import java.util.Scanner;
 import java.util.Set;
 
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -34,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -119,7 +118,7 @@ public class Menu extends Application implements Initializable{
 			for(Person G: Guests) {
 				VBox guestInfo = new VBox();
 				if(G.getRoomNumber() == -1) {
-					guestInfo.setStyle("-fx-background-color: \"#ff9900\";");
+					guestInfo.setStyle("-fx-background-color: \"#ffdb78\";");
 				} else {
 					guestInfo.setStyle("-fx-background-color: \"#ffbaf7\";");
 				}
@@ -154,7 +153,7 @@ public class Menu extends Application implements Initializable{
 			loadStaffList();
 			for(Staff S: staffList) {
 				VBox staffInfo = new VBox();
-				staffInfo.setStyle("-fx-background-color: \"#ff9900\";");
+				staffInfo.setStyle("-fx-background-color: \"#ffdb78\";");
 				staffInfo.getChildren().add(new Text(S.getName()));
 				staffInfo.getChildren().add(new Text(S.getPhone()));
 				staffInfo.getChildren().add(new Text(S.getStaffID()));
@@ -187,7 +186,7 @@ public class Menu extends Application implements Initializable{
 			for(Room R: hotelRooms) {
 				VBox roomInfo = new VBox();
 				if(R.getAvailability() == true) {
-					roomInfo.setStyle("-fx-background-color: \"#ff9900\";");
+					roomInfo.setStyle("-fx-background-color: \"#ffdb78\";");
 				} else {
 					roomInfo.setStyle("-fx-background-color: \"#ff5454\";");
 				}

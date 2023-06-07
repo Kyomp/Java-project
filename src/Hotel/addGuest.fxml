@@ -11,23 +11,23 @@
    <children>
       <SplitPane dividerPositions="0.311787072243346" prefHeight="475.0" prefWidth="528.0">
         <items>
-          <AnchorPane id="LeftAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #64ac80;">
+          <AnchorPane id="LeftAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Button layoutX="17.0" layoutY="38.0" mnemonicParsing="false" onAction="#guestMenu" prefHeight="42.0" prefWidth="126.0" style="-fx-background-color: #00733b;" text="Guest" textFill="WHITE">
+                  <Button layoutX="17.0" layoutY="38.0" mnemonicParsing="false" onAction="#guestMenu" prefHeight="42.0" prefWidth="126.0" text="Guest" textFill="WHITE">
                      <font>
                         <Font name="Monotype Corsiva" size="20.0" />
                      </font></Button>
-                  <Button layoutX="17.0" layoutY="127.0" mnemonicParsing="false" onAction="#staffMenu" prefHeight="42.0" prefWidth="126.0" style="-fx-background-color: #00733b;" text="Staff" textFill="WHITE">
+                  <Button layoutX="17.0" layoutY="127.0" mnemonicParsing="false" onAction="#staffMenu" prefHeight="42.0" prefWidth="126.0" text="Staff" textFill="WHITE">
                      <font>
                         <Font name="Monotype Corsiva" size="20.0" />
                      </font></Button>
-                  <Button layoutX="17.0" layoutY="215.0" mnemonicParsing="false" onAction="#managementMenu" prefHeight="42.0" prefWidth="126.0" style="-fx-background-color: #00733b;" text="Management" textFill="WHITE">
+                  <Button layoutX="17.0" layoutY="215.0" mnemonicParsing="false" onAction="#managementMenu" prefHeight="42.0" prefWidth="126.0" text="Management" textFill="WHITE">
                      <font>
                         <Font name="Monotype Corsiva" size="20.0" />
                      </font></Button>
                </children>
             </AnchorPane>
-          <AnchorPane id="RightAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="310.0" style="-fx-background-color: #ccd4ac;">
+          <AnchorPane id="RightAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="473.0" prefWidth="310.0">
                <children>
                   <Text layoutX="118.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Guest" textAlignment="CENTER" wrappingWidth="121.13671875">
                      <font>

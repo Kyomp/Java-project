@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 #LeftAnchorPane .button{
-	-fx-background-color : "#00733b";
+	-fx-background-color : "#68593a";
 	-fx-font-family :"Monotype Corsiva";
 	-fx-text-fill : "#ffffff";
 	-fx-font-size : 20;
@@ -9,15 +9,15 @@
 }
 
 #LeftAnchorPane{
-	-fx-background-color : "#64ac80";
+	-fx-background-color : "#bc9e5f";
 }
 
 #RightAnchorPane{
-	-fx-background-color :  "#ccd4ac";
+	-fx-background-color :  "#f9ebe0";
 }
 
 #List {
-	-fx-background-color : "#ffee80";
+	-fx-background-color : "#e1c2b1";
 }
 
 #RightAnchorPane Text{
@@ -27,5 +27,5 @@
 #RightAnchorPane .button{
 	-fx-font-family :"Lucida Fax";
 	-fx-font-style: italic;
-	-fx-background-color : "#64ac80";
+	-fx-background-color : "#bc9e5f";
 }
