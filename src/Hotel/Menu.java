@@ -14,6 +14,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -265,7 +267,14 @@ public class Menu extends Application implements Initializable{
 		}
 		if(arg0.equals(getClass().getResource("ChargeGuest.fxml"))) {
 			loadGuests();
+			loadhotelRooms();
 			Person G = loadGuestDetail();
+			int roomFee = 0;
+			for(Room r : hotelRooms) {
+				if(r.getRoomNumber() == G.getRoomNumber()) {
+					roomFee = r.getCostPerNight();
+				}
+			}
 			NameDetail.setText(G.getName());
 			ArrayList<String> prices = new ArrayList<String>();
 			prices.add("Room fee");
@@ -274,7 +283,20 @@ public class Menu extends Application implements Initializable{
 			}
 			ChargeServices.getItems().addAll(prices);
 			ChargeServices.setValue("Room fee");
-			RemainingChargeDetail.setText(Integer.toString(G.getUnpaidCost()));
+			ChargeServices.setOnAction(event -> {
+				if(ChargeServices.getValue()=="Room fee") {
+					int room_Fee = 0;
+					for(Room r : hotelRooms) {
+						if(r.getRoomNumber() == G.getRoomNumber()) {
+							room_Fee = r.getCostPerNight();
+						}
+					}
+					RemainingChargeDetail.setText(Integer.toString(room_Fee));
+					return;
+				}
+			    RemainingChargeDetail.setText(Integer.toString(Service.getServiceList().get(ChargeServices.getValue())));
+			});
+			RemainingChargeDetail.setText(Integer.toString(roomFee));
 			return;
 		}
 	}
@@ -526,21 +548,20 @@ public class Menu extends Application implements Initializable{
 				if(P.getRoomNumber() == -1) {
 					throw new IllegalArgumentException("This guest is not staying in a room.");
 				}
-				for(Room r : hotelRooms) {
-					if(r.getRoomNumber() == P.getRoomNumber()) {
-						for (Person G : Guests) {
-							if(G.equals(P)) {
-								G.charge(r.getCostPerNight());
-								saveGuestDetail(G);
-								break;
-							}
-						}
-						break;
+				Integer cost = Integer.parseInt(RemainingChargeDetail.getText());
+				for (Person G : Guests) {
+					if(G.equals(P)) {
+						G.charge(cost);
 					}
 				}
 			}
 			else {
-				chargeGuestService(P);
+				Integer cost = Integer.parseInt(RemainingChargeDetail.getText());
+				for (Person G : Guests) {
+					if(G.equals(P)) {
+						G.charge(cost);
+					}
+				}
 			}
 			saveGuest();
 			guestMenu(e);
