@@ -116,6 +116,11 @@ public class Menu extends Application implements Initializable{
 			loadGuests();
 			for(Person G: Guests) {
 				VBox guestInfo = new VBox();
+				if(G.getRoomNumber() == -1) {
+					guestInfo.setStyle("-fx-background-color: \"#ff9900\";");
+				} else {
+					guestInfo.setStyle("-fx-background-color: \"#ffbaf7\";");
+				}
 				guestInfo.getChildren().add(new Text(G.getName()));
 				guestInfo.getChildren().add(new Text(G.getPhone()));
 				guestInfo.getChildren().add(new Text(G.getRoomNumber()!=-1?Integer.toString(G.getRoomNumber()):"None"));
@@ -147,6 +152,7 @@ public class Menu extends Application implements Initializable{
 			loadStaffList();
 			for(Staff S: staffList) {
 				VBox staffInfo = new VBox();
+				staffInfo.setStyle("-fx-background-color: \"#ff9900\";");
 				staffInfo.getChildren().add(new Text(S.getName()));
 				staffInfo.getChildren().add(new Text(S.getPhone()));
 				staffInfo.getChildren().add(new Text(S.getStaffID()));
@@ -178,6 +184,11 @@ public class Menu extends Application implements Initializable{
 			loadhotelRooms();
 			for(Room R: hotelRooms) {
 				VBox roomInfo = new VBox();
+				if(R.getAvailability() == true) {
+					roomInfo.setStyle("-fx-background-color: \"#ff9900\";");
+				} else {
+					roomInfo.setStyle("-fx-background-color: \"#ff5454\";");
+				}
 				roomInfo.getChildren().add(new Text(Integer.toString(R.getRoomNumber())));
 				roomInfo.getChildren().add(new Text(R.getType()));
 				roomInfo.getChildren().add(new Text(Integer.toString(R.getCostPerNight())));
@@ -272,6 +283,8 @@ public class Menu extends Application implements Initializable{
 		try {
 			root = FXMLLoader.load(getClass().getResource("StartMenu.fxml"));
 			scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			primaryStage.setTitle("FlowTel");
 			stage = primaryStage;
 			stage.setScene(scene);
 			stage.show();
@@ -283,6 +296,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("GuestMenu.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -290,6 +304,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("StaffMenu.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -297,6 +312,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("ManagementMenu.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -304,6 +320,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("addRoom.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -311,6 +328,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("addGuest.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -318,6 +336,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("addStaff.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -325,6 +344,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("GuestDetails.fxml"));
 		stage = (Stage)(e.getScene().getWindow());
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -332,6 +352,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("RoomDetails.fxml"));
 		stage = (Stage)(e.getScene().getWindow());
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -340,6 +361,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("StaffDetails.fxml"));
 		stage = (Stage)(e.getScene().getWindow());
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -347,6 +369,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("AssignGuestRoom.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -354,6 +377,7 @@ public class Menu extends Application implements Initializable{
 		root = FXMLLoader.load(getClass().getResource("ChargeGuest.fxml"));
 		stage = (Stage)((Node)e.getSource()).getScene().getWindow();
 		scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 	}
