@@ -27,6 +27,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
@@ -307,6 +308,7 @@ public class Menu extends Application implements Initializable{
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("FlowTel");
 			stage = primaryStage;
+			stage.getIcons().add(new Image("file:../../logo.jpg"));
 			stage.setScene(scene);
 			stage.show();
 		} catch(Exception e) {
