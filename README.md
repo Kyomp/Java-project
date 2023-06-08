@@ -71,20 +71,20 @@ We created a user interface using fxmls files with the help of SceneBuilder soft
 # Manual Guide
 The user interface have 3 main buttons located in the left side of the interface: "Guest," "Staff," and "Management":
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/64da97b8-de0e-4411-bb5c-a8396d50ba7b)
+![mainmenu](https://github.com/Kyomp/Java-project/assets/91313923/8590a09d-9533-4441-839b-f6b950370a00)
 
 If those buttons are clicked it will show each aspect's lists of objects (it will navigate to another window that has a list display that is shown in form of a box):
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/d86b0329-fe1b-40c5-82e2-ad2a71f8c685)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/dc02cf27-04a4-467d-85d2-b682c9342301)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/22f1d858-dd1f-452e-b965-5c82327cb27d)
+![guestmenu](https://github.com/Kyomp/Java-project/assets/91313923/2c442ee6-c551-4ece-aa51-a07e778807cb)
+![staffmenu](https://github.com/Kyomp/Java-project/assets/91313923/37de2498-d422-4c73-a91c-9e10942e2c9b)
+![roommenu](https://github.com/Kyomp/Java-project/assets/91313923/a274022e-332b-4008-8cf4-f99c97c7773b)
 
 Each of them has an "add" button that will navigate to each aspect's add window to append the list with new data object.
 
 the add guest menu has 2 field that can be filled in. You can fill a name and a phone number. The accepted phone number are home and mobile that either contains a '+' in front or not. A phone number with wrong format will produce an error message shown in the red text below.
 
-![image](https://github.com/Kyomp/Java-project/assets/91313923/ac4cee34-f848-4d3d-bfc7-eaa37ca3d996)
-![image](https://github.com/Kyomp/Java-project/assets/91313923/898059fb-2147-45bf-9a1e-e6c7bbbb11a5)
+![addguest](https://github.com/Kyomp/Java-project/assets/91313923/6fd698be-1004-4766-9326-0eefa15fa366)
+![image](https://github.com/Kyomp/Java-project/assets/91313923/4dd66cc7-c30e-42e2-bc76-cc8f627f14e5)
 
 The add staff menu has 4 fields to be filled/modified: Name, Phone Number, Staff ID, and Hourly Wage. Phone number format is the same as before. Staff ID consist of a choice box for "M" for male and "F" for female and a number field (max 3 digit). If an ID already exist, an error message is shown. Hourly wage has a minimum of 2000 and below that will show an error message.
 
