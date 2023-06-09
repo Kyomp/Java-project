@@ -5,6 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileTime;
+import java.nio.file.attribute.BasicFileAttributeView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -49,6 +55,7 @@ public class Menu extends Application implements Initializable{
 	private Parent root;
 	private Scene scene;
 	private Stage stage;
+	private Encryption GDEncrypt, GLEncrypt, RDEncrypt, RLEncrypt, SDEncrypt, SLEncrypt;
 	@FXML
 	TextField Name;
 	@FXML
@@ -107,6 +114,17 @@ public class Menu extends Application implements Initializable{
 		staffList = new ArrayList<Staff>();
 		ID_List = new HashSet<String>();
 		RoomNums = new HashSet<Integer>();
+		try {
+			GDEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("GuestDetail.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
+			GLEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("GuestList.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
+			SDEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("StaffDetail.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
+			SLEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("StaffList.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
+			RDEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("RoomDetail.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
+			RLEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("RoomList.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// TODO Auto-generated constructor stub
 	}
 	@Override
@@ -636,104 +654,110 @@ public class Menu extends Application implements Initializable{
 	}
 	private void saveGuest() {
 		try {
-			FileWriter writer = new FileWriter("GuestList.txt", false);
+			File f = new File("GuestList.csv");
+			FileWriter writer = new FileWriter(f, false);
 	        writer.write("");
 	        for (Person G : Guests) {
-	        	writer.write(G.getName() + "," + G.getPhone()+","+G.getRoomNumber()+","+G.getUnpaidCost()+"\n");
+	        	writer.write(GLEncrypt.encrypt(G.getName())  + "," + GLEncrypt.encrypt(G.getPhone())+","+GLEncrypt.encrypt(String.valueOf(G.getRoomNumber()))+","+GLEncrypt.encrypt(String.valueOf(G.getUnpaidCost()))+"\n");
 	        }
 	        writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void saveGuestDetail(Person G) {
 		try {
-			FileWriter writer = new FileWriter("GuestDetail.txt", false);
+			File f = new File("GuestDetail.csv");
+			FileWriter writer = new FileWriter(f, false);
 	        writer.write("");
-	        writer.write(G.getName() + "," + G.getPhone()+","+G.getRoomNumber()+","+G.getUnpaidCost()+"\n");
+	        writer.write(GDEncrypt.encrypt(G.getName()) + "," + GDEncrypt.encrypt(G.getPhone())+","+GDEncrypt.encrypt(String.valueOf(G.getRoomNumber()))+","+GDEncrypt.encrypt(String.valueOf(G.getUnpaidCost()))+"\n");
 	        writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void saveRoom() {
 		try {
-			FileWriter writer = new FileWriter("RoomList.txt", false);
+			File f = new File("RoomList.csv");
+			FileWriter writer = new FileWriter(f, false);
 	        writer.write("");
 	        for (Room R : hotelRooms) {
 	        	if(R.getAvailability()) {
-	        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "\n");
+	        		writer.write(RLEncrypt.encrypt(String.valueOf(R.getRoomNumber())) + "," + RLEncrypt.encrypt(R.getType()) + "," + RLEncrypt.encrypt(String.valueOf(R.getCostPerNight())) + "\n");
 	        	} else {
-	        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "," + R.getGuest().getName() + "," + R.getGuest().getPhone() + "\n");
+	        		writer.write(RLEncrypt.encrypt(String.valueOf(R.getRoomNumber())) + "," + RLEncrypt.encrypt(R.getType()) + "," + RLEncrypt.encrypt(String.valueOf(R.getCostPerNight())) + "," + RLEncrypt.encrypt(R.getGuest().getName()) + "," + RLEncrypt.encrypt(R.getGuest().getPhone()) + "\n");
 	        	}
 	        }
 	        writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void saveRoomDetail(Room R) {
 		try {
-			FileWriter writer = new FileWriter("RoomDetail.txt", false);
+			File f = new File("RoomDetail.csv");
+			FileWriter writer = new FileWriter(f, false);
 	        writer.write("");
 	        if(R.getAvailability()) {
-        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "\n");
+        		writer.write(RDEncrypt.encrypt(String.valueOf(R.getRoomNumber())) + "," + RDEncrypt.encrypt(R.getType()) + "," + RDEncrypt.encrypt(String.valueOf(R.getCostPerNight())) + "\n");
         	} else {
-        		writer.write(R.getRoomNumber() + "," + R.getType() + "," + R.getCostPerNight() + "," + R.getGuest().getName() + "," + R.getGuest().getPhone() + "\n");
+        		writer.write(RDEncrypt.encrypt(String.valueOf(R.getRoomNumber())) + "," + RDEncrypt.encrypt(R.getType()) + "," + RDEncrypt.encrypt(String.valueOf(R.getCostPerNight())) + "," + RDEncrypt.encrypt(R.getGuest().getName()) + "," + RDEncrypt.encrypt(R.getGuest().getPhone()) + "\n");
         	}
 	        writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void saveStaff() {
 		try {
-			FileWriter writer = new FileWriter("StaffList.txt", false);
+			File f = new File("StaffList.csv");
+			FileWriter writer = new FileWriter(f, false);
 	        writer.write("");
 	        for (Staff S : staffList) {
-	        	writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone() + "," + S.getHourlyWage() +"\n");
+	        	writer.write(SLEncrypt.encrypt(S.getStaffID()) + "," + SLEncrypt.encrypt(S.getName()) + "," + SLEncrypt.encrypt(S.getPhone()) + "," + SLEncrypt.encrypt(String.valueOf(S.getHourlyWage())) +"\n");
 	        }
 	        writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void saveStaffDetail(Staff S) {
 		try {
-			FileWriter writer = new FileWriter("StaffDetail.txt", false);
+			File f = new File("StaffDetail.csv");
+			FileWriter writer = new FileWriter(f, false);
 	        writer.write("");
-	        writer.write(S.getStaffID() + "," + S.getName() + "," + S.getPhone() + "," + S.getHourlyWage() +"\n");
+	        writer.write(SDEncrypt.encrypt(S.getStaffID()) + "," + SDEncrypt.encrypt(S.getName()) + "," + SDEncrypt.encrypt(S.getPhone()) + "," + SDEncrypt.encrypt(String.valueOf(S.getHourlyWage())) +"\n");
 	        writer.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void loadStaffList() {
 		// TODO Auto-generated method stub
 		try {
-			File guestFile = new File("StaffList.txt");
-			Scanner input = new Scanner(guestFile);
+			File StaffFile = new File("StaffList.csv");
+			Scanner input = new Scanner(StaffFile);
 			staffList.clear();
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
 				String[] parts = aString.split(",");
-				Staff s1 = new Staff(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
+				Staff s1 = new Staff(SLEncrypt.decrypt(parts[0]), SLEncrypt.decrypt(parts[1]), SLEncrypt.decrypt(parts[2]), Integer.parseInt(SLEncrypt.decrypt(parts[3])));
 				staffList.add(s1);
 				ID_List.add(parts[0]);
 			}
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private Staff loadStaffDetail() {
 		try {
-			File guestFile = new File("StaffDetail.txt");
-			Scanner input = new Scanner(guestFile);
+			File StaffFile = new File("StaffDetail.csv");
+			Scanner input = new Scanner(StaffFile);
 			String aString = input.nextLine();
 			String[] parts = aString.split(",");
-			Staff s1 = new Staff(parts[0], parts[1], parts[2], Integer.parseInt(parts[3]));
+			Staff s1 = new Staff(SDEncrypt.decrypt(parts[0]), SDEncrypt.decrypt(parts[1]), SDEncrypt.decrypt(parts[2]), Integer.parseInt(SDEncrypt.decrypt(parts[3])));
 			return s1;
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -741,47 +765,48 @@ public class Menu extends Application implements Initializable{
 	private void loadGuests() {
 		// TODO Auto-generated method stub
 		try {
-			File guestFile = new File("GuestList.txt");
+			File guestFile = new File("GuestList.csv");
 			Scanner input = new Scanner(guestFile);
 			Guests.clear();
 			
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
 				String[] parts = aString.split(",");
-				Person p1 = new Person(parts[0], parts[1],Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
+//				Person p1 = new Person(parts[0],parts[1],Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
+				Person p1 = new Person(GLEncrypt.decrypt(parts[0]), GLEncrypt.decrypt(parts[1]),Integer.parseInt(GLEncrypt.decrypt(parts[2])),Integer.parseInt(GLEncrypt.decrypt(parts[3])));
 				Guests.add(p1);
 			}
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private Person loadGuestDetail() {
 		try {
-			File guestFile = new File("GuestDetail.txt");
+			File guestFile = new File("GuestDetail.csv");
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
 			String[] parts = aString.split(",");
-			Person p1 = new Person(parts[0], parts[1],Integer.parseInt(parts[2]),Integer.parseInt(parts[3]));
+			Person p1 = new Person(GLEncrypt.decrypt(parts[0]), GLEncrypt.decrypt(parts[1]),Integer.parseInt(GLEncrypt.decrypt(parts[2])),Integer.parseInt(GLEncrypt.decrypt(parts[3])));
 			return p1;
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
 	private Room loadRoomDetail() {
 		try {
-			File guestFile = new File("RoomDetail.txt");
+			File guestFile = new File("RoomDetail.csv");
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
 			String[] parts = aString.split(",");
 			if(parts.length > 3) {
-				Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]), new Person(parts[3], parts[4]));
+				Room r1 = new Room(Integer.parseInt(RLEncrypt.decrypt(parts[0])), RLEncrypt.decrypt(parts[1]), Integer.parseInt(RLEncrypt.decrypt(parts[2])), new Person(RLEncrypt.decrypt(parts[3]), RLEncrypt.decrypt(parts[4])));
 				return r1;
 			} else {
-				Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
+				Room r1 = new Room(Integer.parseInt(RDEncrypt.decrypt(parts[0])), RDEncrypt.decrypt(parts[1]), Integer.parseInt(RDEncrypt.decrypt(parts[2])));
 				return r1;
 			}
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -790,22 +815,22 @@ public class Menu extends Application implements Initializable{
 		// TODO Auto-generated method stub
 		try {
 			hotelRooms.clear();
-			File guestFile = new File("RoomList.txt");
+			File guestFile = new File("RoomList.csv");
 			Scanner input = new Scanner(guestFile);
 			
 			while (input.hasNextLine()) {
 				String aString = input.nextLine();
 				String[] parts = aString.split(",");
 				if(parts.length > 3) {
-					Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]), new Person(parts[3], parts[4]));
+					Room r1 = new Room(Integer.parseInt(RLEncrypt.decrypt(parts[0])), RLEncrypt.decrypt(parts[1]), Integer.parseInt(RLEncrypt.decrypt(parts[2])), new Person(RLEncrypt.decrypt(parts[3]), RLEncrypt.decrypt(parts[4])));
 					hotelRooms.add(r1);
 				} else {
-					Room r1 = new Room(Integer.parseInt(parts[0]), parts[1], Integer.parseInt(parts[2]));
+					Room r1 = new Room(Integer.parseInt(RLEncrypt.decrypt(parts[0])), RLEncrypt.decrypt(parts[1]), Integer.parseInt(RLEncrypt.decrypt(parts[2])));
 					hotelRooms.add(r1);
 				}
-				RoomNums.add(Integer.parseInt(parts[0]));
+				RoomNums.add(Integer.parseInt(RLEncrypt.decrypt(parts[0])));
 			}
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
