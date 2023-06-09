@@ -786,7 +786,7 @@ public class Menu extends Application implements Initializable{
 			Scanner input = new Scanner(guestFile);
 			String aString = input.nextLine();
 			String[] parts = aString.split(",");
-			Person p1 = new Person(GLEncrypt.decrypt(parts[0]), GLEncrypt.decrypt(parts[1]),Integer.parseInt(GLEncrypt.decrypt(parts[2])),Integer.parseInt(GLEncrypt.decrypt(parts[3])));
+			Person p1 = new Person(GDEncrypt.decrypt(parts[0]), GDEncrypt.decrypt(parts[1]),Integer.parseInt(GDEncrypt.decrypt(parts[2])),Integer.parseInt(GDEncrypt.decrypt(parts[3])));
 			return p1;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -800,7 +800,7 @@ public class Menu extends Application implements Initializable{
 			String aString = input.nextLine();
 			String[] parts = aString.split(",");
 			if(parts.length > 3) {
-				Room r1 = new Room(Integer.parseInt(RLEncrypt.decrypt(parts[0])), RLEncrypt.decrypt(parts[1]), Integer.parseInt(RLEncrypt.decrypt(parts[2])), new Person(RLEncrypt.decrypt(parts[3]), RLEncrypt.decrypt(parts[4])));
+				Room r1 = new Room(Integer.parseInt(RDEncrypt.decrypt(parts[0])), RDEncrypt.decrypt(parts[1]), Integer.parseInt(RDEncrypt.decrypt(parts[2])), new Person(RDEncrypt.decrypt(parts[3]), RDEncrypt.decrypt(parts[4])));
 				return r1;
 			} else {
 				Room r1 = new Room(Integer.parseInt(RDEncrypt.decrypt(parts[0])), RDEncrypt.decrypt(parts[1]), Integer.parseInt(RDEncrypt.decrypt(parts[2])));
