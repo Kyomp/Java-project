@@ -46,6 +46,17 @@ We created a user interface using fxmls files with the help of SceneBuilder soft
 - javafx.scene.text.Text
 - javafx.stage.Stage
 
+# Technology Used
+**Java** - Used for our main program language (foundation) to make the entire application along with its algorithm.
+
+**JavaFX** - a part of Java programming language that acts as a platform for developing interactive user interface for applications.
+
+**Scene Builder** - a platform to design a user interface easily by using FXML files that enables UI creation separated from the logic of the application. We used this to easily create JavaFX layout and fasten the development of the app.
+
+**CSS** - Cascading Style Sheets (CSS) is used for styling and structuring an HTML/XML file. In our case, we used Scene Builder to make FXML files and CSS could be implemented to it.
+
+**Encryption** - Secure Hash Algorithm (SHA), for cryptography using hash functions, published by America’s NSA. Used in encrypting our data files along with Advanced Encryption Standard (AES).
+
 # Features
 **Guests**
 - View list of guests
