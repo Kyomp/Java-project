@@ -55,7 +55,7 @@ We created a user interface using fxmls files with the help of SceneBuilder soft
 
 **CSS** - Cascading Style Sheets (CSS) is used for styling and structuring an HTML/XML file. In our case, we used Scene Builder to make FXML files and CSS could be implemented to it.
 
-**Encryption** - Secure Hash Algorithm (SHA), for cryptography using hash functions, published by America’s NSA. Used in encrypting our data files along with Advanced Encryption Standard (AES).
+**Encryption** - Secure Hash Algorithm (SHA), for cryptography using hash functions, published by America’s NSA. Used in encrypting our data files along with Advanced Encryption Standard (AES). IMPORTANT: The files cannot be decrypted in new devices. Therefore, to make it accessible, delete the contents of the csv file with notepad so it becomes blank.
 
 # Features
 **Guests**
