@@ -115,6 +115,7 @@ public class Menu extends Application implements Initializable{
 		ID_List = new HashSet<String>();
 		RoomNums = new HashSet<Integer>();
 		try {
+			System.out.println(Files.getFileAttributeView(Paths.get(new File("GuestDetail.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
 			GDEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("GuestDetail.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
 			GLEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("GuestList.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
 			SDEncrypt = new Encryption(Files.getFileAttributeView(Paths.get(new File("StaffDetail.csv").getAbsolutePath()), BasicFileAttributeView.class).readAttributes().creationTime().toString());
@@ -326,7 +327,7 @@ public class Menu extends Application implements Initializable{
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setTitle("FlowTel");
 			stage = primaryStage;
-			stage.getIcons().add(new Image("file:../../logo.jpg"));
+			stage.getIcons().add(new Image("file:../../crownlogo.png"));
 			stage.setScene(scene);
 			stage.show();
 		} catch(Exception e) {
@@ -743,7 +744,7 @@ public class Menu extends Application implements Initializable{
 				String[] parts = aString.split(",");
 				Staff s1 = new Staff(SLEncrypt.decrypt(parts[0]), SLEncrypt.decrypt(parts[1]), SLEncrypt.decrypt(parts[2]), Integer.parseInt(SLEncrypt.decrypt(parts[3])));
 				staffList.add(s1);
-				ID_List.add(parts[0]);
+				ID_List.add(SLEncrypt.decrypt(parts[0]));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
